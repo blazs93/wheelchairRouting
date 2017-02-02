@@ -20,3 +20,10 @@ html, body {
   line-height: 30px;
   padding-left: 10px;
 }
+a{
+  color: white;
+}
+a:hover{
+  color: white;
+  text-decoration: none;
+}
