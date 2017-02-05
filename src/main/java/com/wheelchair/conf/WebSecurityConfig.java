@@ -1,4 +1,4 @@
-package com.wheelchair;
+package com.wheelchair.conf;
 
 import javax.sql.DataSource;
 
@@ -14,26 +14,25 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 @Configuration
 @EnableWebMvcSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	private DataSource dataSource;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		//auth
+		// auth
 	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		//TODO
 		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery(
-		"select username,password, enabled from users where username=?")
-		.authoritiesByUsernameQuery(
-		"select username, role from user_roles where username=?");
+				.usersByUsernameQuery("select login_name, password, active from user where login_name=?")
+				.authoritiesByUsernameQuery("select login_name, role from user_roles where username=?");
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/*");
+		// web.ignoring().antMatchers("/css/*");
 	}
 }

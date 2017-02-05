@@ -1,4 +1,4 @@
-package com.wheelchair;
+package com.wheelchair.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,9 +23,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/db_example");
-		driverManagerDataSource.setUsername("springuser");
-		driverManagerDataSource.setPassword("ThePassword");
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/db_wheelchair");
+		driverManagerDataSource.setUsername("root");
+		driverManagerDataSource.setPassword("root");
 		return driverManagerDataSource;
 	}
 
