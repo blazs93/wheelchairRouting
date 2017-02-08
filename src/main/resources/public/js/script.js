@@ -15,8 +15,8 @@ var map;
 
        
        /* document.getElementById('start').addEventListener('change', onChangeHandler);
-        document.getElementById('end').addEventListener('change', onChangeHandler);*/
-        document.getElementById('go').addEventListener('click', onChangeHandler);
+        document.getElementById('end').addEventListener('change', onChangeHandler);
+        document.getElementById('go').addEventListener('click', onChangeHandler);*/
       }
 
    
