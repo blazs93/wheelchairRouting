@@ -17,11 +17,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/login.html").setViewName("login");
 		registry.addViewController("/registration.html").setViewName("registration");
 		registry.addViewController("/users.html").setViewName("users");
+		registry.addViewController("/user.html").setViewName("user");
+		registry.addViewController("/anonym.html").setViewName("anonym");
+		registry.addViewController("/admin.html").setViewName("admin");
 	}
 
 	@Bean(name = "dataSource")
 	public DriverManagerDataSource dataSource() {
-		
+
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/db_wheelchair");
@@ -37,4 +40,5 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		resolver.setSuffix(".html");
 		return resolver;
 	}
+
 }

@@ -21,12 +21,10 @@ public class UserRole {
 
 	@ManyToOne
 	@Cascade({CascadeType.ALL})
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "username")
 	private User user;
 
-	@ManyToOne
-	@JoinColumn(name = "role_id")
-	private Role role;
+	private String role;
 
 	public long getUserRoleId() {
 		return userRoleId;
@@ -34,10 +32,6 @@ public class UserRole {
 
 	public User getUser() {
 		return user;
-	}
-
-	public Role getRole() {
-		return role;
 	}
 
 	public void setUserRoleId(final long userRoleId) {
@@ -48,7 +42,11 @@ public class UserRole {
 		this.user = user;
 	}
 
-	public void setRole(final Role role) {
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
 		this.role = role;
 	}
 }

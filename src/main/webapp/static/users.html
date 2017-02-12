@@ -1,5 +1,5 @@
 	<!DOCTYPE html>
-	<html>
+	<html xmlns:th="http://www.thymeleaf.org">	
 	<head>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<meta charset="utf-8">
@@ -20,6 +20,12 @@
 	          </button>
 	        </div>
 	        <div id="navbar" class="navbar-collapse collapse">
+	        	<form action="/" class="navbar-form navbar-left">
+	        		<button class="btn btn-success">Home</button>
+	        	</form>
+	        	<form action="/logout" class="navbar-form navbar-right">
+	        		<button class="btn btn-success">Logout</button>
+	        	</form>
 	        </div>
 	      </div>
 	    </nav>

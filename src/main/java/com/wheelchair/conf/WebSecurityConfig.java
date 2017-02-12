@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @SuppressWarnings("deprecation")
 @Configuration
@@ -20,15 +21,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// auth
+		http.authorizeRequests()
+		.antMatchers("/users.html", "/admin.html").access("hasRole('ROLE_ADMIN')")
+		.anyRequest().permitAll()
+		.antMatchers("/user.html").access("hasRole('ROLE_USER')")
+		.anyRequest().permitAll()
+		.and()
+		.formLogin().defaultSuccessUrl("/index.html")
+		.loginPage("/login.html")
+		.permitAll()
+		.and()
+		.logout()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+		.and()
+		.exceptionHandling().accessDeniedPage("/login.html")
+		.and().csrf().disable();
 	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		//TODO
 		auth.jdbcAuthentication().dataSource(dataSource)
-				.usersByUsernameQuery("select login_name, password, active from user where login_name=?")
-				.authoritiesByUsernameQuery("select login_name, role from user_roles where username=?");
+				.usersByUsernameQuery("select username, password, active from user where username=?")
+				.authoritiesByUsernameQuery("select username, role from user_role where username=?");
 	}
 
 	@Override

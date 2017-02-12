@@ -11,12 +11,12 @@ $(document).ready(function() {
                 var row = table.insertRow(-1);
                 
                 var cell1 = row.insertCell(-1);
-                cell1.innerHTML = data[i].loginName;
+                cell1.innerHTML = data[i].username;
                 
                 var btn = document.createElement("BUTTON");
-                btn.id = data[i].loginName;
+                btn.id = data[i].username;
                 
-                var t = document.createTextNode(data[i].loginName);
+                var t = document.createTextNode(data[i].username);
                 btn.appendChild(t);       
 
                 var cell2 = row.insertCell(-1);
@@ -25,7 +25,7 @@ $(document).ready(function() {
             }
             
             MY.users.forEach(function(element) {
-            	 document.getElementById(element.loginName).onclick = function(){alert(element.loginName);}
+            	 document.getElementById(element.username).onclick = function(){alert(element.username);}
             });
         }
         else{

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wheelchair.db.model.Role;
 import com.wheelchair.db.model.User;
 import com.wheelchair.db.model.UserRole;
 import com.wheelchair.db.repository.UserRepository;
@@ -25,7 +24,7 @@ public class UserController {
 	private UserRoleRepository userRoleRepository;
 
 	@GetMapping(path = "/add") // Map ONLY GET Requests
-	public @ResponseBody String addNewUser(@RequestParam String loginName, @RequestParam String name,
+	public @ResponseBody String addNewUser(@RequestParam String username, @RequestParam String name,
 			@RequestParam String password) {
 		// @ResponseBody means the returned String is the response, not a view
 		// name
@@ -33,17 +32,12 @@ public class UserController {
 
 		User user = new User();
 		user.setActive(true);
-		user.setLoginName(loginName);
+		user.setUsername(username);
 		user.setPassword(password);
 		user.setName(name);
-		// userRepository.save(user);
-
-		Role role = new Role();
-		role.setRoleId(2);
-		role.setRoleName(Role.ROLE_USER);
 
 		UserRole userRole = new UserRole();
-		userRole.setRole(role);
+		userRole.setRole("ROLE_USER");
 		userRole.setUser(user);
 
 		userRoleRepository.save(userRole);

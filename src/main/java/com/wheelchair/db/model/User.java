@@ -1,8 +1,7 @@
 package com.wheelchair.db.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,20 +10,14 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long userId;
-
-	private String loginName;
+	@Column(unique = true)
+	private String username;
 	private String name;
 	private String password;
 	private boolean active = true;
 
-	public long getUserId() {
-		return userId;
-	}
-
-	public String getLoginName() {
-		return loginName;
+	public String getUsername() {
+		return username;
 	}
 
 	public String getName() {
@@ -39,12 +32,8 @@ public class User {
 		return active;
 	}
 
-	public void setUserId(final long userId) {
-		this.userId = userId;
-	}
-
-	public void setLoginName(final String loginName) {
-		this.loginName = loginName;
+	public void setUsername(final String loginName) {
+		this.username = loginName;
 	}
 
 	public void setName(final String name) {
