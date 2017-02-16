@@ -1,5 +1,37 @@
 var map;
 
+$(document).ready(function() {
+    $.get("getAuth", function(data, status) {
+        if (status == "success") {
+          var usersForm = document.getElementById('usersForm');
+          var loginButton = document.getElementById('loginButton');
+          var logoutButton = document.getElementById('logoutButton');
+          var registrationButton = document.getElementById('registrationButton');
+          if (data == "[ROLE_ADMIN]"){
+            usersForm.style.display = '';
+          } else{
+            usersForm.style.display = 'none';
+          }
+
+          if (data == "[ROLE_ANONYMOUS]"){
+              loginButton.style.display='';
+              logoutButton.style.display='none';
+              registrationButton.style.display='';
+          } else{
+              loginButton.style.display='none';
+              logoutButton.style.display='';
+              registrationButton.style.display='none';
+          }
+          
+          
+        }
+        else{
+            alert(status);
+        }
+    });
+    
+}) ;
+
       function initMap() {
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -14,9 +46,9 @@ var map;
         };
 
        
-       /* document.getElementById('start').addEventListener('change', onChangeHandler);
-        document.getElementById('end').addEventListener('change', onChangeHandler);
-        document.getElementById('go').addEventListener('click', onChangeHandler);*/
+       /* document.getElementById('from').addEventListener('change', onChangeHandler);
+        document.getElementById('to').addEventListener('change', onChangeHandler);*/
+        document.getElementById('search').addEventListener('click', onChangeHandler);
       }
 
    
@@ -24,8 +56,8 @@ var map;
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         directionsService.route({
-          origin: document.getElementById('start').value,
-          destination: document.getElementById('end').value,
+          origin: document.getElementById('from').value,
+          destination: document.getElementById('to').value,
           travelMode: 'DRIVING'
         }, function(response, status) {
           if (status === 'OK') {
