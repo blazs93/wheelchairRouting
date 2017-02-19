@@ -21,9 +21,7 @@ $(document).ready(function() {
               loginButton.style.display='none';
               logoutButton.style.display='';
               registrationButton.style.display='none';
-          }
-          
-          
+          }     
         }
         else{
             alert(status);
@@ -33,11 +31,17 @@ $(document).ready(function() {
 }) ;
 
       function initMap() {
+
+        var centerPosition = {
+            lat: 47.38334311,
+            lng: 19.215989
+          };
+
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
-          center: {lat: 41.85, lng: -87.65}
+          zoom: 15,
+          center: centerPosition
         });
         directionsDisplay.setMap(map);
 
@@ -45,14 +49,15 @@ $(document).ready(function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         };
 
-       
-       /* document.getElementById('from').addEventListener('change', onChangeHandler);
-        document.getElementById('to').addEventListener('change', onChangeHandler);*/
         document.getElementById('search').addEventListener('click', onChangeHandler);
+
+        google.maps.event.addListener(map,'click',function(event) {
+          $('#myModal').modal('show');
+          $('#modalLat').val(event.latLng.lat());
+          $('#modalLong').val(event.latLng.lng());
+        });
+
       }
-
-   
-
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         directionsService.route({

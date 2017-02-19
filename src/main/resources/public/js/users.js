@@ -48,8 +48,7 @@ $(document).ready(function() {
         else{
             alert(status);
         }
-    });
-    
+    }); 
 }) ;
 
 

@@ -24,7 +24,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/db_wheelchair");
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/db_wheelchair?verifyServerCertificate=false&useSSL=true");
 		driverManagerDataSource.setUsername("root");
 		driverManagerDataSource.setPassword("root");
 		return driverManagerDataSource;
