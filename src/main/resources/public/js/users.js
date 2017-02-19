@@ -3,7 +3,7 @@ window.MY = {};
 MY.users = [];
 
 $(document).ready(function() {
-    $.get("request/all", function(data, status) {
+    $.get("request/user", function(data, status) {
         if (status == "success") {
         	MY.users = data;
             var table = document.getElementById('userTableBody');
@@ -11,21 +11,38 @@ $(document).ready(function() {
                 var row = table.insertRow(-1);
                 
                 var cell1 = row.insertCell(-1);
-                cell1.innerHTML = data[i].username;
+                cell1.innerHTML = data[i][0];
                 
-                var btn = document.createElement("BUTTON");
-                btn.id = data[i].username;
-                
-                var t = document.createTextNode(data[i].username);
-                btn.appendChild(t);       
+                var checkbox = document.createElement("INPUT");
+                checkbox.setAttribute("type", "checkbox");
+                checkbox.id = data[i][0];
+                checkbox.checked = data[i][1];
+             
+                var t = document.createTextNode(data[i][1]);
+                checkbox.appendChild(t);       
 
                 var cell2 = row.insertCell(-1);
-                cell2.appendChild(btn);
+                cell2.appendChild(checkbox);
                          
             }
             
             MY.users.forEach(function(element) {
-            	 document.getElementById(element.username).onclick = function(){alert(element.username);}
+            	 document.getElementById(element[0]).onclick = function(){
+                    var active = !element[1];
+                    element[1] = !element[1];
+                    var username = element[0];
+                    $.get("request/updateUser", 
+                        { "active": active,
+                          "username":username
+                        }, function(data, status) {
+                        if (status == "success") {
+                            alert(status);
+                        }
+                        else{
+                            alert(status);
+                        }   
+                    });
+                }
             });
         }
         else{
@@ -34,5 +51,7 @@ $(document).ready(function() {
     });
     
 }) ;
+
+
 
 
