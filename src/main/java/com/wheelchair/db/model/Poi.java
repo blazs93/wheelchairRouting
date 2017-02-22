@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.geo.Point;
-
 @Entity
 @Table(name = "poi")
 public class Poi {
@@ -15,15 +13,42 @@ public class Poi {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long poiId;
-	
-	private Point latLong;
+	private Double latitude;
+	private Double longitude;
+	private String description;
+	private String acc;
 
-	public Point getLatLong() {
-		return latLong;
+	public Double getLatitude() {
+		return latitude;
 	}
 
-	public void setLatLong(Point latLong) {
-		this.latLong = latLong;
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getAccessible() {
+		return acc;
+	}
+
+	public void setAccessible(String accessible) {
+		this.acc = accessible;
 	}
 
 }

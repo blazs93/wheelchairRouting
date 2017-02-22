@@ -23,7 +23,7 @@ public class UserController {
 	@Autowired
 	private UserRoleRepository userRoleRepository;
 
-	@GetMapping(path = "/add") // Map ONLY GET Requests
+	@GetMapping(path = "/addUser") // Map ONLY GET Requests
 	public @ResponseBody String addNewUser(@RequestParam String username, @RequestParam String name,
 			@RequestParam String password) {
 		// @ResponseBody means the returned String is the response, not a view
