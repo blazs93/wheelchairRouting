@@ -1,67 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/signin.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/signin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-  <title>Wheelchair Routing Login</title>
+    <title>Wheelchair Routing Registration</title>
 
-</head>
+  </head>
 
-<body>
-  <div class="container">
-   <form class="form-horizontal" action='/request/addUser' method="GET">
-  <fieldset>
-    <div id="legend">
-      <legend class="">Register</legend>
-    </div>
-    <div class="control-group">
-      <!-- Login name -->
-      <label class="control-label"  for="username">Login name</label>
-      <div class="controls">
-        <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-        <p class="help-block">Login name can contain any letters or numbers, without spaces</p>
-      </div>
-    </div>
- 
-    <div class="control-group">
-      <!-- Name -->
-      <label class="control-label" for="name">Name</label>
-      <div class="controls">
-        <input type="text" id="name" name="name" placeholder="" class="input-xlarge">
-        <p class="help-block">Please provide your Name</p>
-      </div>
-    </div>
- 
-    <div class="control-group">
-      <!-- Password-->
-      <label class="control-label" for="password">Password</label>
-      <div class="controls">
-        <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-        <p class="help-block">Password should be at least 4 characters</p>
-      </div>
-    </div>
- 
-    <div class="control-group">
-      <!-- Password -->
-      <label class="control-label"  for="password_confirm">Password (Confirm)</label>
-      <div class="controls">
-        <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
-        <p class="help-block">Please confirm password</p>
-      </div>
-    </div>
- 
-    <div class="control-group">
-      <!-- Button -->
-      <div class="controls">
-        <button class="btn btn-lg btn-primary">Register</button>
-      </div>
-    </div>
-  </fieldset>
-</form>
-  </div> 
-</body>
+  <body>
+    <div class="container">
+      <form class="form-signin" action='/request/addUser' method="GET">
+        <h2 class="form-signin-heading">Registration</h2>
+
+        <label class="sr-only" for="username">Login name</label>
+        <input class="form-control" type="text" id="username" name="username" placeholder="Login name">
+
+        <label class="sr-only" for="name">Name</label>
+        <input class="form-control" type="text" id="name" name="name" placeholder="Name">
+
+        <label class="sr-only" for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password" placeholder="Password">
+   
+        <label class="sr-only" for="password_confirm">Password (Confirm)</label>
+        <input class="form-control" type="password" id="password_confirm" name="password_confirm" placeholder="Password confirm">
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      </form>
+    </div> 
+  </body>
 </html>

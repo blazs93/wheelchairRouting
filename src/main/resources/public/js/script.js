@@ -161,7 +161,13 @@ function initMap() {
   var directionsDisplay = new google.maps.DirectionsRenderer;
   map = new google.maps.Map(document.getElementById('map'), {
     zoom : 15,
-    center : centerPosition
+    center : centerPosition,
+    mapTypeControl: false,
+    zoomControl: true,
+    zoomControlOptions: {
+    	position: google.maps.ControlPosition.RIGHT_TOP
+    },
+    streetViewControl: false
   });
   directionsDisplay.setMap(map);
 
@@ -172,11 +178,12 @@ function initMap() {
   document.getElementById('search')
     .addEventListener('click', onChangeHandler);
 
-  var addPOIControlDiv = document.createElement('div');
-  var POIControl = new CustomControl(addPOIControlDiv, map);
+  var CustomControlDiv = document.createElement('div');
+  CustomControlDiv.setAttribute("class", "customControlDiv");
+  var CUSTOMControl = new CustomControl(CustomControlDiv, map);
 
-  addPOIControlDiv.index = 1;
-  map.controls[google.maps.ControlPosition.LEFT_TOP].push(addPOIControlDiv);
+  CustomControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.LEFT_TOP].push(CustomControlDiv);
 
   //Add POIs
   $.get("/allPoi", function(data, status) {

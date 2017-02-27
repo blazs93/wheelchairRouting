@@ -1,6 +1,6 @@
  #map {
   height: 100%;
-  margin-top: 50px;
+  margin-top: 55px;
 }
 html, body {
   height: 96%;
@@ -20,6 +20,40 @@ html, body {
   line-height: 30px;
   padding-left: 10px;
 }
+#navbar{
+	background-color: rgb(247, 186, 123);
+}
+.navbar-inverse{
+	background-color: rgb(247, 186, 123);
+	border-color: rgb(247, 186, 123);
+}
+.container{
+	width: 98%;
+}
+.form-group{
+	margin-left: 0px;
+	margin-right: 0px;
+	padding: 5px;
+}
+.btn-primary{
+	margin-left: 0px;
+	margin-right: 0px;
+	background-color: rgb(101, 180, 206);
+	border-color: rgb(101, 180, 206);
+}
+.btn-primary:hower{
+	background-color: #204d74;
+    border-color: #204d74;
+}
+.btn-primary:active{
+	background-color: #204d74;
+    border-color: #204d74;
+}
+.btn-primary:focus{
+	border-color: #204d74;
+    background-color: rgb(101, 180, 206);
+}
+.
 a{
   color: white;
 }
@@ -52,7 +86,8 @@ a:hover{
     box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
     border-left: 0px;
     min-width: 37px;
-    margin: 10px;
+    margin-top: 10px;
+    margin-left: 2px;
 }
 .controlUI:hover{
     direction: ltr;
@@ -91,5 +126,9 @@ a:hover{
     box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
     border-left: 0px;
     min-width: 37px;
-    margin: 10px;
+    margin-top: 10px;
+    margin-left: 2px;
+}
+.customControlDiv{
+	margin-left: 10px;
 }
