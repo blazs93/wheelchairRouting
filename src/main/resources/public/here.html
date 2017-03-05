@@ -1,17 +1,22 @@
-	<!DOCTYPE html>
+
+<!DOCTYPE html>
 	<html>
-	<head>
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-	<meta charset="utf-8">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
-  <script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-core.js"></script>
-  <script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-service.js"></script>
-  <script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.js"></script>
-  <script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-	<title>Wheelchair Routing</title>
-	</head>
-	<body>
+		<head>
+			<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+			<meta charset="utf-8">
+			<link href="css/bootstrap.min.css" rel="stylesheet">
+			<link href="css/style.css" rel="stylesheet">
+			<link rel="stylesheet" type="text/css" href="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.css" />
+			<script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-core.js"></script>
+			<script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-service.js"></script>
+			<script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+			<script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+			<script type="text/javascript" src="here.js"></script>
+			<link href="here.css" rel="stylesheet">
+			<title>Wheelchair Routing</title>
+		</head>
+		<body>
 		
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 	      <div class="container">
@@ -25,19 +30,19 @@
 	        </div>
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <div class="navbar-form navbar-left form-group">
-	            <input type="text" placeholder="Search" class="form-control">
+	            <input id="searchBar" type="text" placeholder="Search" class="form-control">
 	          </div>
 	          <div class="navbar-form navbar-left form-group">
-	           	<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" /></button>
+	           	<button id="searchBarButton" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" /></button>
 	          </div>
 	          <div class="navbar-form navbar-left form-group">
-	          	<input id="from" type="text" placeholder="From" class="form-control">
+	          	<input id="fromRoute" type="text" placeholder="From" class="form-control">
 	          </div>
 	          <div class="navbar-form navbar-left form-group">
-	            <input id="to" type="text" placeholder="To" class="form-control">
+	            <input id="toRoute" type="text" placeholder="To" class="form-control">
 	          </div>
 	          <div class="navbar-form navbar-left form-group">
-	           	<button id="search" class="btn btn-primary"><span class="glyphicon glyphicon-search" /></button>
+	           	<button id="searchRoute" class="btn btn-primary"><span class="glyphicon glyphicon-search" /></button>
 	          </div>
 	          <form id="loginButton" action="/login.html" class="navbar-form navbar-right form-group">
 	        	<button class="btn btn-primary">Login</button>
@@ -140,10 +145,7 @@
   			</div>
 		</div>
 		
-		
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYlTbZ6fNPtubHnh0s14PjdVi39wX5eDU&libraries=drawing&callback=initMap"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="js/script.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 	</body>
 	</html>
