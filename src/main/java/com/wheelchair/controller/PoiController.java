@@ -33,4 +33,9 @@ public class PoiController {
 	public @ResponseBody Iterable<Poi> getAllPois() {
 		return poiRepository.findAll();
 	}
+	
+	@GetMapping(path = "/getClosestPoi")
+	public @ResponseBody Iterable<Poi> getClosestPoi(@RequestParam Double latitude, @RequestParam Double longitude) {
+		return poiRepository.findClosest(latitude, longitude);
+	}
 }

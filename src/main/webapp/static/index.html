@@ -93,6 +93,32 @@
     			</div>
   			</div>
 		</div>
+
+    <div class="modal fade" id="waypointModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add waypoint</h4>
+              </div>
+              <div class="modal-body">
+                <form action='/addWaypoint' method="GET">
+                <div class="form-group">
+                  <label for="waypointLatitude">Latitude</label>
+                  <input id="waypointLatitude" name="waypointLatitude" type="text" placeholder="Latitude" class="form-control">
+                </div>
+              
+                <div class="form-group">
+                  <label for="waypointLongitude">Longitude</label>
+                  <input id="waypointLongitude" name="waypointLongitude" type="text" placeholder="Longitude" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </form>
+            </div>
+          </div>
+        </div>
+    </div>
 		
 		<div class="modal fade" id="markerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   			<div class="modal-dialog" role="document">
@@ -120,11 +146,8 @@
       				<div class="modal-body">
       					<form action='/addRoute' method="GET">
   							<div class="form-group">
-    							<label for="description">Description</label>
-    							<textarea class="form-control" id="description" name="description" rows="3"></textarea>
-    							<textarea class="form-control" id="jsonRoute" name="jsonRoute" rows="3"></textarea>
-  							</div>
-  							<div class="form-group">
+                  <input class = "" id="waypoint1" name="waypoint1"></input>
+                  <input class = "" id="waypoint2" name="waypoint2"></input>
     							<label for="accessible">Accessible</label>
     							<select class="form-control" id="accessible" name="accessible">
     								<option>Not defined</option>

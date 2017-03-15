@@ -10,7 +10,7 @@ import com.wheelchair.db.model.Route;
 
 public interface RouteRepository extends JpaRepository<Route, Long> {
 	
-	@Query("SELECT points FROM Route r WHERE r.acc = 'Not accessible'")
-	public List<Route> findNotAccessibleRoutes();
+	/*@Query("SELECT points FROM Route r WHERE r.acc = 'Not accessible'")
+	public List<Route> findNotAccessibleRoutes();*/
 	
 }

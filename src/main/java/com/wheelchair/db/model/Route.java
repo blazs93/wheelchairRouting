@@ -1,5 +1,8 @@
 package com.wheelchair.db.model;
 
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,17 +17,9 @@ public class Route {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long routeId;
-	private String description;
 	private String acc;
-	private String points;
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	@ElementCollection
+	private List<Waypoint> waypoints;
 
 	public String getAccessible() {
 		return acc;
@@ -34,12 +29,11 @@ public class Route {
 		this.acc = accessible;
 	}
 
-	public String getPoints() {
-		return points;
+	public List<Waypoint> getWaypoints() {
+		return waypoints;
 	}
 
-	public void setPoints(String points) {
-		this.points = points;
+	public void setWaypoints(List<Waypoint> waypoints) {
+		this.waypoints = waypoints;
 	}
-
 }
