@@ -36,5 +36,9 @@ public class Waypoint {
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
+	
+	public Vertex toVertex() {
+		return new Vertex(this.waypointId+"", "Vertex of: " +this.waypointId);
+	}
 
 }

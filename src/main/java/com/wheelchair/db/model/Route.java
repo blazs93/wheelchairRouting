@@ -18,6 +18,7 @@ public class Route {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long routeId;
 	private String acc;
+	private double distance;
 	@ElementCollection
 	private List<Waypoint> waypoints;
 
@@ -35,5 +36,22 @@ public class Route {
 
 	public void setWaypoints(List<Waypoint> waypoints) {
 		this.waypoints = waypoints;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	
+	public Edge toEdge(){
+		Edge edge = new Edge(this.getRouteId()+"", waypoints.get(0).toVertex(), waypoints.get(1).toVertex(), distance);
+		return edge;
+	}
+
+	private long getRouteId() {
+		return routeId;
 	}
 }
