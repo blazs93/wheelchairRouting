@@ -44,8 +44,8 @@ public class RouteController {
 		return routeRepository.findAll();
 	}
 	
-	/*@GetMapping(path = "/notAccessibleRoutes")
+	@GetMapping(path = "/notAccessibleRoutes")
 	public @ResponseBody Iterable<Route> getNotAccessibleRoutes() {
 		return routeRepository.findNotAccessibleRoutes();
-	}*/
+	}
 }

@@ -43,13 +43,13 @@ $(document).ready(
 
 function getRouting(){
   var waypts = [];
-   waypts.push({
+   /*waypts.push({
               location: "Templom tér 30-32, Gyál, 2360",
               stopover: false
-            });
+            });*/
   directionsService.route({
     //origin: document.getElementById('from').value,
-    origin: "Gyál József Attila 5",
+    origin: "Gyál József Attila 1",
     destination: "Gyál Táncsics Mihály 10",
     waypoints: waypts,
     travelMode: 'DRIVING',
