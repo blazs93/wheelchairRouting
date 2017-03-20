@@ -16,7 +16,7 @@ public class Route {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long routeId;
+	private long id;
 	private String acc;
 	private double distance;
 	@ElementCollection
@@ -47,11 +47,19 @@ public class Route {
 	}
 	
 	public Edge toEdge(){
-		Edge edge = new Edge(this.getRouteId()+"", waypoints.get(0).toVertex(), waypoints.get(1).toVertex(), distance);
+		Edge edge = new Edge(this.getId()+"", waypoints.get(0).toVertex(), waypoints.get(1).toVertex(), distance);
 		return edge;
 	}
 
-	private long getRouteId() {
-		return routeId;
+	private long getId() {
+		return id;
+	}
+	
+	public Waypoint getSource(){
+		return waypoints.get(0);
+	}
+	
+	public Waypoint getDestination(){
+		return waypoints.get(1);
 	}
 }

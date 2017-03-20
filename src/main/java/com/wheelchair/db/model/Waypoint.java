@@ -12,12 +12,12 @@ public class Waypoint {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long waypointId;
+	private long id;
 	private Double latitude;
 	private Double longitude;
 	
-	public Long getWaypointId() {
-		return waypointId;
+	public Long getId() {
+		return id;
 	}
 	
 	public Double getLatitude() {
@@ -38,7 +38,7 @@ public class Waypoint {
 	}
 	
 	public Vertex toVertex() {
-		return new Vertex(this.waypointId+"", "Vertex of: " +this.waypointId);
+		return new Vertex(this.id+"", "Vertex of: " +this.id);
 	}
 
 }

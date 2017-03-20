@@ -9,7 +9,7 @@ import com.wheelchair.db.model.Waypoint;
 
 
 public interface WaypointRepository extends JpaRepository<Waypoint, Long> {
-	@Query(value = "SELECT p.waypoint_id, p.latitude, p.longitude, 111.045 * DEGREES(ACOS(COS(RADIANS(?1)) " +
+	@Query(value = "SELECT p.id, p.latitude, p.longitude, 111.045 * DEGREES(ACOS(COS(RADIANS(?1)) " +
 			"* COS(RADIANS(p.latitude)) " +
 			"* COS(RADIANS(p.longitude) - RADIANS(?2)) " +
 			"+ SIN(RADIANS(?1)) " +

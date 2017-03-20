@@ -21,7 +21,7 @@ public class WheelchairApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WheelchairApplication.class, args);
 		
-		testExcute();
+		//testExcute();
 
 	}
 

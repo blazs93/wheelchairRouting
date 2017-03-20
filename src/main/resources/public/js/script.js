@@ -1,4 +1,5 @@
 var map;
+var geocoder;
 window.MY = {};
 MY.markers = []
 var poly;
@@ -41,49 +42,113 @@ $(document).ready(
  }
 });
 
+function codeAddress() {
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
 function getRouting(){
-  var waypts = [];
-   /*waypts.push({
-              location: "Templom tér 30-32, Gyál, 2360",
-              stopover: false
-            });*/
-  directionsService.route({
-    //origin: document.getElementById('from').value,
-    origin: "Gyál József Attila 1",
-    destination: "Gyál Táncsics Mihály 10",
-    waypoints: waypts,
-    travelMode: 'DRIVING',
-    provideRouteAlternatives: true
-  }, function(response, status) {
-      if (status === 'OK') {
-        directionsDisplay.setDirections(response);
+  var waypoint1;
+  var waypoint2;
+  geocoder.geocode( { 'address': document.getElementById('from').value}, function(results, status) {
+    if (status == 'OK') {
+      $.get('/getClosestWaypoint', 
+        { latitude: results[0].geometry.location.lat(),
+          longitude: results[0].geometry.location.lng()
+        }, 
+        function(data) {
+          waypoint1 = data[0].id;
+          directionsService.route({
+            origin: document.getElementById('from').value,
+            destination: data[0].latitude +', '+ data[0].longitude,
+            travelMode: 'DRIVING',
+            provideRouteAlternatives: true
+          }, function(response, status) {
+              if (status === 'OK') {
+                var color = '#65b4ce';
+                var path = new google.maps.Polyline({
+                  path: response.routes[0].overview_path,
+                  geodesic: true,
+                  strokeColor: color,
+                  strokeOpacity: 1.0,
+                  strokeWeight: 4
+                });
 
-            /*var line = new google.maps.Polyline({
-              path: dirrections.routes[0].overview_path,
-              strokeColor: '#FF0000',
-              strokeOpacity: 0.5,
-              strokeWeight: 4
-            });*/
+                path.setMap(map);   
 
-            var path = response.routes[0].overview_path;
+              } else {
+                window.alert('Directions request failed due to ' + status);
+              }
+          });
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
 
-            var latitude;
-            var longitude;
-            for (var i = 0; i < path.length; i++) {
-              var point = path[i];
-              latitude = point.lat();
-              longitude = point.lng();
-              var marker = new google.maps.Marker({
-                position: point,
-                map: map,
-                title: latitude +" "+longitude
-              });         
-            }
-            var myLatlng = {lat: latitude, lng: longitude};
-            map.setCenter(myLatlng);
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
+  geocoder.geocode( { 'address': document.getElementById('to').value}, function(results, status) {
+    if (status == 'OK') {
+      $.get('/getClosestWaypoint', 
+        { latitude: results[0].geometry.location.lat(),
+          longitude: results[0].geometry.location.lng()
+        }, 
+        function(data) {
+          waypoint2 = data[0].id;
+          directionsService.route({
+            origin: document.getElementById('to').value,
+            destination: data[0].latitude +', '+ data[0].longitude,
+            travelMode: 'DRIVING',
+            provideRouteAlternatives: true
+          }, function(response, status) {
+              if (status === 'OK') {
+                var color = '#65b4ce';
+                var path = new google.maps.Polyline({
+                  path: response.routes[0].overview_path,
+                  geodesic: true,
+                  strokeColor: color,
+                  strokeOpacity: 1.0,
+                  strokeWeight: 4
+                });
+                path.setMap(map);
+
+                $.get('/routing', 
+                  { waypoint1: waypoint1,
+                    waypoint2: waypoint2
+                  }, 
+                  function(data) {
+                      var points = [];
+
+                      for (var i = 0; i<data.length; i++) {
+                        points.push(new google.maps.LatLng(data[i].latitude, data[i].longitude));
+                      }
+                      var color = '#65b4ce';
+                      var path = new google.maps.Polyline({
+                        path: points,
+                        geodesic: true,
+                        strokeColor: color,
+                        strokeOpacity: 1.0,
+                        strokeWeight: 4
+                      });
+                path.setMap(map);
+                  });
+              } else {
+                window.alert('Directions request failed due to ' + status);
+              }
+          });
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
   });
 }
 
@@ -242,7 +307,7 @@ function addLatLng(event) {
       longitude: event.latLng.lng()
     }, 
     function(data) {
-      waypoints.push(data[0].waypointId);
+      waypoints.push(data[0].id);
       var path = poly.getPath();
       path.push(new google.maps.LatLng(data[0].latitude, data[0].longitude));
 
@@ -265,6 +330,7 @@ function initPoly() {
 
 //Inits map
 function initMap() {
+  geocoder = new google.maps.Geocoder();
 
   var centerPosition = {
    lat : 47.38334311,
@@ -376,7 +442,7 @@ function initMap() {
           geodesic: true,
           strokeColor: color,
           strokeOpacity: 1.0,
-          strokeWeight: 4
+          strokeWeight: 9
         });
 
         path.setMap(map);
