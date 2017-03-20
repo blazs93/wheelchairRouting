@@ -34,11 +34,12 @@ public class WheelchairApplication {
 		}
 
 		addLane("Edge_0", 0, 1, 5);
-		addLane("Edge_1", 0, 2, 4);
-		addLane("Edge_2", 4, 5, 5);
-		addLane("Edge_3", 0, 4, 5);
-		addLane("Edge_4", 1, 2, 4);
-		addLane("Edge_5", 2, 5, 5);
+		addLane("Edge_1", 1, 3, 20);
+		addLane("Edge_2", 3, 4, 5);
+		addLane("Edge_3", 4, 2, 5);
+		addLane("Edge_3", 2, 5, 5);
+		addLane("Edge_5", 1, 2, 1);
+		
 
 		// Lets check from location Loc_1 to Loc_10
 		Graph graph = new Graph(nodes, edges);

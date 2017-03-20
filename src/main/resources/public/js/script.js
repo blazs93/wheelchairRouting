@@ -84,63 +84,64 @@ function getRouting(){
                   strokeWeight: 4
                 });
 
-                path.setMap(map);   
-
-              } else {
-                window.alert('Directions request failed due to ' + status);
-              }
-          });
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
-
-  geocoder.geocode( { 'address': document.getElementById('to').value}, function(results, status) {
-    if (status == 'OK') {
-      $.get('/getClosestWaypoint', 
-        { latitude: results[0].geometry.location.lat(),
-          longitude: results[0].geometry.location.lng()
-        }, 
-        function(data) {
-          waypoint2 = data[0].id;
-          directionsService.route({
-            origin: document.getElementById('to').value,
-            destination: data[0].latitude +', '+ data[0].longitude,
-            travelMode: 'DRIVING',
-            provideRouteAlternatives: true
-          }, function(response, status) {
-              if (status === 'OK') {
-                var color = '#65b4ce';
-                var path = new google.maps.Polyline({
-                  path: response.routes[0].overview_path,
-                  geodesic: true,
-                  strokeColor: color,
-                  strokeOpacity: 1.0,
-                  strokeWeight: 4
-                });
                 path.setMap(map);
 
-                $.get('/routing', 
-                  { waypoint1: waypoint1,
-                    waypoint2: waypoint2
-                  }, 
-                  function(data) {
-                      var points = [];
+                geocoder.geocode( { 'address': document.getElementById('to').value}, function(results, status) {
+                if (status == 'OK') {
+                  $.get('/getClosestWaypoint', 
+                    { latitude: results[0].geometry.location.lat(),
+                      longitude: results[0].geometry.location.lng()
+                    }, 
+                    function(data) {
+                      waypoint2 = data[0].id;
+                      directionsService.route({
+                        origin: document.getElementById('to').value,
+                        destination: data[0].latitude +', '+ data[0].longitude,
+                        travelMode: 'DRIVING',
+                        provideRouteAlternatives: true
+                      }, function(response, status) {
+                          if (status === 'OK') {
+                            var color = '#65b4ce';
+                            var path = new google.maps.Polyline({
+                              path: response.routes[0].overview_path,
+                              geodesic: true,
+                              strokeColor: color,
+                              strokeOpacity: 1.0,
+                              strokeWeight: 4
+                            });
+                            path.setMap(map);
 
-                      for (var i = 0; i<data.length; i++) {
-                        points.push(new google.maps.LatLng(data[i].latitude, data[i].longitude));
-                      }
-                      var color = '#65b4ce';
-                      var path = new google.maps.Polyline({
-                        path: points,
-                        geodesic: true,
-                        strokeColor: color,
-                        strokeOpacity: 1.0,
-                        strokeWeight: 4
+                            $.get('/routing', 
+                              { waypoint1: waypoint1,
+                                waypoint2: waypoint2
+                              }, 
+                              function(data) {
+                                  var points = [];
+
+                                  for (var i = 0; i<data.length; i++) {
+                                    points.push(new google.maps.LatLng(data[i].latitude, data[i].longitude));
+                                  }
+                                  var color = '#65b4ce';
+                                  var path = new google.maps.Polyline({
+                                    path: points,
+                                    geodesic: false,
+                                    strokeColor: color,
+                                    strokeOpacity: 1.0,
+                                    strokeWeight: 4
+                                  });
+                            path.setMap(map);
+                              });
+                          } else {
+                            window.alert('Directions request failed due to ' + status);
+                          }
                       });
-                path.setMap(map);
                   });
+                } else {
+                  alert('Geocode was not successful for the following reason: ' + status);
+                }
+              });  
+
+
               } else {
                 window.alert('Directions request failed due to ' + status);
               }
@@ -150,6 +151,8 @@ function getRouting(){
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
+
+  
 }
 
 //document.getElementById('from').addEventListener('change', onFromChange);
