@@ -57,24 +57,26 @@ public class DijkstraAlgorithm {
     }
 
     private double getDistance(Waypoint node, Waypoint target) {
-            for (Route edge : edges) {
+           /* for (Route edge : edges) {
                     if (edge.getSource().equals(node)
                                     && edge.getDestination().equals(target)) {
                             return edge.getDistance();
                     }
             }
-            throw new RuntimeException("Should not happen");
+            throw new RuntimeException("Should not happen");*/
+    	return 0;
     }
 
     private List<Waypoint> getNeighbors(Waypoint node) {
-            List<Waypoint> neighbors = new ArrayList<Waypoint>();
+          /*  List<Waypoint> neighbors = new ArrayList<Waypoint>();
             for (Route edge : edges) {
                     if (edge.getSource().equals(node)
                                     && !isSettled(edge.getDestination())) {
                             neighbors.add(edge.getDestination());
                     }
             }
-            return neighbors;
+            return neighbors;*/
+            return null;
     }
 
     private Waypoint getMinimum(Set<Waypoint> vertexes) {

@@ -18,9 +18,11 @@ public class Route {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String acc;
-	private double distance;
-	@ElementCollection
-	private List<Waypoint> waypoints;
+	private Integer distance;
+	/*@ElementCollection
+	private List<Waypoint> waypoints;*/
+	private Long sourceId;
+	private Long destinationId;
 
 	public String getAccessible() {
 		return acc;
@@ -30,36 +32,41 @@ public class Route {
 		this.acc = accessible;
 	}
 
-	public List<Waypoint> getWaypoints() {
-		return waypoints;
-	}
-
-	public void setWaypoints(List<Waypoint> waypoints) {
-		this.waypoints = waypoints;
-	}
-
-	public double getDistance() {
+	public Integer getDistance() {
 		return distance;
 	}
 
-	public void setDistance(double distance) {
+	public void setDistance(Integer distance) {
 		this.distance = distance;
 	}
 	
 	public Edge toEdge(){
-		Edge edge = new Edge(this.getId()+"", waypoints.get(0).toVertex(), waypoints.get(1).toVertex(), distance);
-		return edge;
+		//Edge edge = new Edge(this.getId()+"", waypoints.get(0).toVertex(), waypoints.get(1).toVertex(), distance);
+		//return edge;
+		return null;
 	}
 
-	private long getId() {
+	public long getId() {
 		return id;
 	}
 	
-	public Waypoint getSource(){
-		return waypoints.get(0);
+	public void setId(long id) {
+		this.id = id;
 	}
-	
-	public Waypoint getDestination(){
-		return waypoints.get(1);
+
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(long sourceId) {
+		this.sourceId = sourceId;
+	}
+
+	public Long getDestinationId() {
+		return destinationId;
+	}
+
+	public void setDestinationId(long destinationId) {
+		this.destinationId = destinationId;
 	}
 }

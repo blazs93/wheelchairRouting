@@ -57,7 +57,25 @@ function codeAddress() {
   });
 }
 
+var path1;
+var path2;
+var route;
+
+function resetRouting(){
+  if(path1 != null)
+    path1.setMap(null);
+  if(path2 != null)
+    path2.setMap(null);
+  if(route != null)
+    route.setMap(null);
+
+  path1=null;
+  path2=null;
+  route=null;
+}
+
 function getRouting(){
+  resetRouting();
   var waypoint1;
   var waypoint2;
   geocoder.geocode( { 'address': document.getElementById('from').value}, function(results, status) {
@@ -76,7 +94,7 @@ function getRouting(){
           }, function(response, status) {
               if (status === 'OK') {
                 var color = '#65b4ce';
-                var path = new google.maps.Polyline({
+                path1 = new google.maps.Polyline({
                   path: response.routes[0].overview_path,
                   geodesic: true,
                   strokeColor: color,
@@ -84,7 +102,7 @@ function getRouting(){
                   strokeWeight: 4
                 });
 
-                path.setMap(map);
+                path1.setMap(map);
 
                 geocoder.geocode( { 'address': document.getElementById('to').value}, function(results, status) {
                 if (status == 'OK') {
@@ -102,14 +120,14 @@ function getRouting(){
                       }, function(response, status) {
                           if (status === 'OK') {
                             var color = '#65b4ce';
-                            var path = new google.maps.Polyline({
+                            path2 = new google.maps.Polyline({
                               path: response.routes[0].overview_path,
                               geodesic: true,
                               strokeColor: color,
                               strokeOpacity: 1.0,
                               strokeWeight: 4
                             });
-                            path.setMap(map);
+                            path2.setMap(map);
 
                             $.get('/routing', 
                               { waypoint1: waypoint1,
@@ -122,14 +140,14 @@ function getRouting(){
                                     points.push(new google.maps.LatLng(data[i].latitude, data[i].longitude));
                                   }
                                   var color = '#65b4ce';
-                                  var anyád = new google.maps.Polyline({
+                                  route = new google.maps.Polyline({
                                     path: points,
                                     geodesic: false,
                                     strokeColor: color,
                                     strokeOpacity: 1.0,
                                     strokeWeight: 4
                                   });
-                                  anyád.setMap(map);
+                                  route.setMap(map);
                               });
                           } else {
                             window.alert('Directions request failed due to ' + status);
@@ -444,8 +462,8 @@ function initMap() {
           path: points,
           geodesic: true,
           strokeColor: color,
-          strokeOpacity: 0.5,
-          strokeWeight: 3
+          strokeOpacity: 0.2,
+          strokeWeight: 10
         });
 
         path.setMap(map);
