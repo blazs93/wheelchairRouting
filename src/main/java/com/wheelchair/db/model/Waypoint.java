@@ -20,6 +20,10 @@ public class Waypoint {
 		return id;
 	}
 	
+	public void setId(Long id){
+		this.id = id;
+	}
+	
 	public Double getLatitude() {
 		return latitude;
 	}
@@ -38,7 +42,10 @@ public class Waypoint {
 	}
 	
 	public Vertex toVertex() {
-		return new Vertex(this.id+"", "Vertex of: " +this.id);
+		 Vertex v = new Vertex(this.id, "Vertex of: " +this.id);
+		 v.setLatitude(latitude);
+		 v.setLongitude(longitude);
+		 return v;
 	}
 
 }

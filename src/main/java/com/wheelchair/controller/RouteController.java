@@ -11,14 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wheelchair.db.model.DijkstraAlgorithm;
 import com.wheelchair.db.model.Edge;
+import com.wheelchair.db.model.Graph;
 import com.wheelchair.db.model.Route;
 import com.wheelchair.db.model.Vertex;
 import com.wheelchair.db.model.Waypoint;
 import com.wheelchair.db.repository.RouteRepository;
 import com.wheelchair.db.repository.WaypointRepository;
-import com.wheelchair.dijkstra.DijkstraAlgorithm;
-import com.wheelchair.dijkstra.Graph;
+//import com.wheelchair.dijkstra.DijkstraAlgorithm;
+//import com.wheelchair.dijkstra.Graph;
 
 @Controller
 public class RouteController {
@@ -46,7 +48,7 @@ public class RouteController {
 		
 		routeRepository.save(route);
 		
-		return "redirect:/index.html";  
+		return "redirect:/index.html";
 	}
 	
 	
@@ -86,7 +88,7 @@ public class RouteController {
 	
 	@RequestMapping("/routing")
 	public @ResponseBody Iterable<Waypoint> routing(@RequestParam Long waypoint1, @RequestParam Long waypoint2) {
-		List<Route> routes = routeRepository.findAll();
+		/*List<Route> routes = routeRepository.findAll();
 		List<Waypoint> waypoints = waypointRepository.findAll();
 		
 		Waypoint wp1 = waypointRepository.getOne(waypoint1);
@@ -106,6 +108,72 @@ public class RouteController {
 			System.out.println(vertex.getId());
 		}
 		
-		return path;
+		return path;*/
+		Waypoint source = waypointRepository.getOne(waypoint1);
+		Waypoint destination = waypointRepository.getOne(waypoint2);
+		//testExcute(wp1, wp2);
+		List<Waypoint> waypoints = waypointRepository.findAll();
+		List<Route> routes = routeRepository.findAll();
+		nodes = new ArrayList<Vertex>();
+		edges = new ArrayList<Edge>();
+	
+		for(Waypoint wp: waypoints) {
+			nodes.add(wp.toVertex());
+		}
+		
+		for(Route r : routes) {
+			Edge e = r.toEdge();
+			addLane(e.getId(), e.getSource(), e.getDestination(), e.getWeight());
+		}
+		
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+		//TODO:
+		dijkstra.execute(source.toVertex());
+		LinkedList<Vertex> path = dijkstra.getPath(destination.toVertex());
+		List<Waypoint> waypointPath = new ArrayList<Waypoint>();
+		
+		for (Vertex vertex : path) {
+			System.out.println(vertex);
+			waypointPath.add(vertex.toWaypoint());
+		}
+		
+		
+		return waypointPath;
+	}
+	
+	static List<Vertex> nodes;
+	static List<Edge> edges;
+	
+	private void testExcute(Waypoint source, Waypoint destination) {
+		List<Waypoint> waypoints = waypointRepository.findAll();
+		List<Route> routes = routeRepository.findAll();
+		nodes = new ArrayList<Vertex>();
+		edges = new ArrayList<Edge>();
+	
+		for(Waypoint wp: waypoints) {
+			nodes.add(wp.toVertex());
+		}
+		
+		for(Route r : routes) {
+			Edge e = r.toEdge();
+			addLane(e.getId(), e.getSource(), e.getDestination(), e.getWeight());
+		}
+		
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+		//TODO:
+		dijkstra.execute(source.toVertex());
+		LinkedList<Vertex> path = dijkstra.getPath(destination.toVertex());
+
+		for (Vertex vertex : path) {
+			System.out.println(vertex);
+		}
+
+	}
+
+	private void addLane(String laneId, Vertex sourceLocNo, Vertex destLocNo, double duration) {
+		Edge lane = new Edge(laneId, sourceLocNo, destLocNo, duration);
+		edges.add(lane);
 	}
 }

@@ -28,8 +28,8 @@ public class WheelchairApplication {
 	public static void testExcute() {
 		nodes = new ArrayList<Vertex>();
 		edges = new ArrayList<Edge>();
-		for (int i = 0; i < 6; i++) {
-			Vertex location = new Vertex("Node_" + i, "Node_" + i);
+		for (long i = 0; i < 6; i++) {
+			Vertex location = new Vertex(i, "Node_" + i);
 			nodes.add(location);
 		}
 

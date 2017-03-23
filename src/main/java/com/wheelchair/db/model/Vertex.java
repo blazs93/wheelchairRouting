@@ -1,20 +1,38 @@
 package com.wheelchair.db.model;
 
 public class Vertex {
-	final private String id;
+	final private Long id;
 	final private String name;
+	private Double latitude;
+	private Double longitude;
 
-	public Vertex(String id, String name) {
+	public Vertex(Long id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
 	}
 
 	@Override
@@ -45,6 +63,14 @@ public class Vertex {
 	@Override
 	public String toString() {
 		return name;
+	}
+	
+	public Waypoint toWaypoint() {
+		Waypoint wp = new Waypoint();
+		wp.setLatitude(latitude);
+		wp.setLongitude(longitude);
+		wp.setId(id);
+		return wp;
 	}
 
 }

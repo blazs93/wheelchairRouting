@@ -122,14 +122,14 @@ function getRouting(){
                                     points.push(new google.maps.LatLng(data[i].latitude, data[i].longitude));
                                   }
                                   var color = '#65b4ce';
-                                  var path = new google.maps.Polyline({
+                                  var anyád = new google.maps.Polyline({
                                     path: points,
                                     geodesic: false,
                                     strokeColor: color,
                                     strokeOpacity: 1.0,
                                     strokeWeight: 4
                                   });
-                            path.setMap(map);
+                                  anyád.setMap(map);
                               });
                           } else {
                             window.alert('Directions request failed due to ' + status);
@@ -342,7 +342,7 @@ function initMap() {
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom : 15,
+    zoom : 18,
     center : centerPosition,
     mapTypeControl: false,
     zoomControl: true,
@@ -444,8 +444,8 @@ function initMap() {
           path: points,
           geodesic: true,
           strokeColor: color,
-          strokeOpacity: 1.0,
-          strokeWeight: 9
+          strokeOpacity: 0.5,
+          strokeWeight: 3
         });
 
         path.setMap(map);
