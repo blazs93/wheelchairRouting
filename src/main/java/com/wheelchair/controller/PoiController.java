@@ -23,7 +23,15 @@ public class PoiController {
 		poi.setLatitude(latitude);
 		poi.setLongitude(longitude);
 		poi.setDescription(description);
-		poi.setAccessible(accessible);
+		String accessibleValue = "";
+		if(accessible.equalsIgnoreCase("bejárható")){
+			accessibleValue = "accessible";
+		} else if (accessible.equalsIgnoreCase("nem bejárható")) {
+			accessibleValue ="not accessible";
+		} else {
+			accessibleValue= "not defined";
+		}
+		poi.setAccessible(accessibleValue);
 		poiRepository.save(poi);
 		
 		return "redirect:/index.html";  

@@ -12,9 +12,31 @@ var directionsDisplay;
 var routePointCounter = 0;
 var waypoints = [];
 
+//roles
+var ROLE_ADMIN = "[ROLE_ADMIN]";
+var ROLE_USER = "[ROLE_USER]";
+var ROLE_ANONYMOUS = "[ROLE_ANONYMOUS]";
+
+//service errors
+var DIRECTIONS_ERROR = "Útvonal kérés hiba: ";
+var GEOCODE_ERROR = "Geo code hiba: ";
+
+//POI
+var ADD_NEW_POI = "Új POI hozzáadása";
+var CANCEL_ADD_NEW_POI = "POI hozzáadás elvetése";
+
+//accessible
+var ACCESSIBLE = "accessible";
+var NOT_ACCESSIBLE = "not accessible";
+var NOT_DEFINED = "not defined";
+
+var ACCESSIBLE_HUN = "Állapot: Bejárható";
+var NOT_ACCESSIBLE_HUN = "Állapot: Nem bejárható";
+var NOT_DEFINED_HUN = "Állapot: Nem meghatározott";
 // Get auth, to add or remove role specific buttons.
 $(document).ready(
   function() {
+   $('#spinner').show();
    $.get("getAuth", function(data, status) {
     if (status == "success") {
      var usersForm = document.getElementById('usersForm');
@@ -22,13 +44,17 @@ $(document).ready(
      var logoutButton = document.getElementById('logoutButton');
      var registrationButton = document
      .getElementById('registrationButton');
-     if (data == "[ROLE_ADMIN]") {
+     if (data == ROLE_ADMIN) {
       usersForm.style.display = '';
-    } else {
+      addMapControls();
+    } else if (data == ROLE_USER) {
+      addMapControls();
+      usersForm.style.display = 'none';
+    } else{
       usersForm.style.display = 'none';
     }
 
-    if (data == "[ROLE_ANONYMOUS]") {
+    if (data == ROLE_ANONYMOUS) {
       loginButton.style.display = '';
       logoutButton.style.display = 'none';
       registrationButton.style.display = '';
@@ -52,7 +78,7 @@ function codeAddress() {
           position: results[0].geometry.location
       });
     } else {
-      alert('Geocode was not successful for the following reason: ' + status);
+      alert(GEOCODE_ERROR + status);
     }
   });
 }
@@ -60,6 +86,9 @@ function codeAddress() {
 var path1;
 var path2;
 var route;
+var fromMarker;
+var destinationMarker;
+var markers = [];
 
 function resetRouting(){
   if(path1 != null)
@@ -68,18 +97,35 @@ function resetRouting(){
     path2.setMap(null);
   if(route != null)
     route.setMap(null);
+  if(markers[0] != null)
+    markers[0].setMap(null); 
+  if(markers[1] != null)
+    markers[1].setMap(null);
 
   path1=null;
   path2=null;
   route=null;
+  markers = [];
+  //fromMarker = null;
+  //destinationMarker = null;
+
 }
 
 function getRouting(){
+  $('#spinner').show();
   resetRouting();
   var waypoint1;
   var waypoint2;
   geocoder.geocode( { 'address': document.getElementById('from').value}, function(results, status) {
     if (status == 'OK') {
+      var myLatLng = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
+      var fromMarker = new google.maps.Marker({
+        position : myLatLng,
+        map : map,
+        icon: "marker/from.png",
+        title : document.getElementById('from').value,
+        });
+      markers.push(fromMarker);
       $.get('/getClosestWaypoint', 
         { latitude: results[0].geometry.location.lat(),
           longitude: results[0].geometry.location.lng()
@@ -106,6 +152,14 @@ function getRouting(){
 
                 geocoder.geocode( { 'address': document.getElementById('to').value}, function(results, status) {
                 if (status == 'OK') {
+                  var myLatLng = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
+                  var destinationMarker = new google.maps.Marker({
+                    position : myLatLng,
+                    map : map,
+                    icon: "marker/destination.png",
+                    title : document.getElementById('to').value,
+                    });
+                  markers.push(destinationMarker);
                   $.get('/getClosestWaypoint', 
                     { latitude: results[0].geometry.location.lat(),
                       longitude: results[0].geometry.location.lng()
@@ -150,24 +204,25 @@ function getRouting(){
                                   route.setMap(map);
                               });
                           } else {
-                            window.alert('Directions request failed due to ' + status);
+                            window.alert(DIRECTIONS_ERROR + status);
                           }
                       });
                   });
                 } else {
-                  alert('Geocode was not successful for the following reason: ' + status);
+                  alert(GEOCODE_ERROR + status);
                 }
               });  
 
 
               } else {
-                window.alert('Directions request failed due to ' + status);
+                window.alert(DIRECTIONS_ERROR + status);
               }
           });
       });
     } else {
-      alert('Geocode was not successful for the following reason: ' + status);
+      alert(GEOCODE_ERROR + status);
     }
+    $('#spinner').hide();
   });
 
   
@@ -187,7 +242,7 @@ function CustomControl(controlDiv, map) {
   //Add POI button
   var addPOIButton = document.createElement('button');
   addPOIButton.setAttribute("class", "controlUI");
-  addPOIButton.title = 'Click to add new POI';
+  addPOIButton.title = ADD_NEW_POI;
   controlDiv.appendChild(addPOIButton);
 
   //Marker icon
@@ -203,7 +258,7 @@ function CustomControl(controlDiv, map) {
 
     if(buttonActive){
       addPOIButton.setAttribute("class", "controlUIactive");
-      addPOIButton.title = 'Click to disable add POI function';
+      addPOIButton.title = CANCEL_ADD_NEW_POI;
       google.maps.event.addListener(map, 'click', function(event) {
         $('#myModal').modal('show');
         $('#latitude').val(event.latLng.lat());
@@ -211,7 +266,7 @@ function CustomControl(controlDiv, map) {
       });
     } else {
       addPOIButton.setAttribute("class", "controlUI");
-      addPOIButton.title = 'Click to add new POI';
+      addPOIButton.title = ADD_NEW_POI;
       google.maps.event.clearListeners(map, 'click');
     }
   });
@@ -219,7 +274,7 @@ function CustomControl(controlDiv, map) {
    //Add Waypoint button
   var addWaypointButton = document.createElement('button');
   addWaypointButton.setAttribute("class", "controlUI");
-  addWaypointButton.title = 'Click to add new waypoint';
+  addWaypointButton.title = 'Új kereszteződés hozzáadása';
   controlDiv.appendChild(addWaypointButton);
 
   //Waypoint icon
@@ -235,7 +290,7 @@ function CustomControl(controlDiv, map) {
 
     if(waypointButtonActive){
       addWaypointButton.setAttribute("class", "controlUIactive");
-      addWaypointButton.title = 'Click to disable add waypoint function';
+      addWaypointButton.title = 'Kereszteződés hozzáadás elvetése';
       google.maps.event.addListener(map, 'click', function(event) {
         //todo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $('#waypointModal').modal('show');
@@ -244,7 +299,7 @@ function CustomControl(controlDiv, map) {
       });
     } else {
       addWaypointButton.setAttribute("class", "controlUI");
-      addWaypointButton.title = 'Click to add new waypoint';
+      addWaypointButton.title = 'Új kereszteződés hozzáadása';
       google.maps.event.clearListeners(map, 'click');
     }
   });
@@ -253,7 +308,7 @@ function CustomControl(controlDiv, map) {
   // Add Route button
   var addRouteButton = document.createElement('button');
   addRouteButton.setAttribute("class", "controlUI");
-  addRouteButton.title = 'Click to add new Route';
+  addRouteButton.title = 'Új út hozzáadása';
   controlDiv.appendChild(addRouteButton);
 
   //Route icon
@@ -270,7 +325,7 @@ function CustomControl(controlDiv, map) {
     if(routeButtonActive){
     	routePointCounter = 0;
       addRouteButton.setAttribute("class", "controlUIactive");
-      addRouteButton.title = 'Click to disable add Route function';
+      addRouteButton.title = 'Út hozzáadás elvetése';
       initPoly();
       poly.setMap(map);
       map.addListener('click', addLatLng);
@@ -280,7 +335,7 @@ function CustomControl(controlDiv, map) {
       poly = null;
       controlDiv.removeChild(addRouteReadyButton);
       addRouteButton.setAttribute("class", "controlUI");
-      addRouteButton.title = 'Click to add new Route';
+      addRouteButton.title = 'Új út hozzáadása';
       google.maps.event.clearListeners(map, 'click');
     }
   });
@@ -288,7 +343,7 @@ function CustomControl(controlDiv, map) {
   //Add route ready button
   var addRouteReadyButton = document.createElement('button');
   addRouteReadyButton.setAttribute("class", "controlUI");
-  addRouteReadyButton.title = 'Route ready!';
+  addRouteReadyButton.title = 'Út kész!';
 
   var routeReady = document.createElement('span');
   routeReady.setAttribute("class", "glyphicon glyphicon-ok");
@@ -349,6 +404,15 @@ function initPoly() {
 }
 
 
+function addMapControls(){
+    var CustomControlDiv = document.createElement('div');
+    CustomControlDiv.setAttribute("class", "customControlDiv");
+    var CUSTOMControl = new CustomControl(CustomControlDiv, map);
+
+    CustomControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.LEFT_TOP].push(CustomControlDiv);
+  }
+
 //Inits map
 function initMap() {
   geocoder = new google.maps.Geocoder();
@@ -370,13 +434,6 @@ function initMap() {
     streetViewControl: false
   });
   directionsDisplay.setMap(map);
-
-  var CustomControlDiv = document.createElement('div');
-  CustomControlDiv.setAttribute("class", "customControlDiv");
-  var CUSTOMControl = new CustomControl(CustomControlDiv, map);
-
-  CustomControlDiv.index = 1;
-  map.controls[google.maps.ControlPosition.LEFT_TOP].push(CustomControlDiv);
 
   //Add waypoints
   $.get("/allWaypoint", function(data, status) {
@@ -409,7 +466,7 @@ function initMap() {
   });
 
   //Add POIs
-  /*$.get("/allPoi", function(data, status) {
+  $.get("/allPoi", function(data, status) {
     if (status == "success") {
       var pois = data;
       var latitude;
@@ -418,10 +475,19 @@ function initMap() {
         var point = pois[i];
         latitude = point.latitude;
         longitude = point.longitude;
+        var icon = "";
+        if (point.accessible == ACCESSIBLE) {
+              icon = "marker/accessible.png";
+          } else if (point.accessible == NOT_ACCESSIBLE) {
+              icon = "marker/not_accessible.png";
+          } else {
+              icon = "marker/not_defined.png";
+          }
         var myLatLng = {lat: latitude, lng: longitude};
         var marker = new google.maps.Marker({
           position : myLatLng,
           map : map,
+          icon: icon,
           title : point.description,
           accessible: point.accessible
         });
@@ -431,15 +497,23 @@ function initMap() {
       MY.markers.forEach(function (element){
         google.maps.event.addDomListener(element, 'click', function() {
           $('#markerModal').modal('show');
+          var acc = "";
+          if (element.accessible == ACCESSIBLE) {
+              acc = ACCESSIBLE_HUN;
+          } else if (element.accessible == NOT_ACCESSIBLE) {
+              acc = NOT_ACCESSIBLE_HUN;
+          } else {
+              acc = NOT_DEFINED_HUN;
+          }
           $('#markerDescription').text(element.title);
-          $('#markerAccessible').text(element.accessible);      
+          $('#markerAccessible').text(acc);      
         });
       });
     }
     else{
       alert(status);
     }
-  });*/
+  });
 
 //Add Routes
   $.get("/allRoutes", function(data, status) {
@@ -450,9 +524,9 @@ function initMap() {
         points.push(new google.maps.LatLng(data[i].waypoints[0].latitude, data[i].waypoints[0].longitude));
         points.push(new google.maps.LatLng(data[i].waypoints[1].latitude, data[i].waypoints[1].longitude));
         var color;
-        if (data[i].accessible == "Accessible") {
+        if (data[i].accessible == ACCESSIBLE) {
           color = '#00dc04';  
-        } else if (data[i].accessible == "Not accessible") {
+        } else if (data[i].accessible == NOT_ACCESSIBLE) {
           color = '#ff0000';
         } else {
           color = '#dcce00';
@@ -462,15 +536,17 @@ function initMap() {
           path: points,
           geodesic: true,
           strokeColor: color,
-          strokeOpacity: 0.2,
+          strokeOpacity: 0.05,
           strokeWeight: 10
         });
 
         path.setMap(map);
       }
+      $('#spinner').hide();
     }
     else{
       alert(status);
+      $('#spinner').hide();
     }
   });
 }

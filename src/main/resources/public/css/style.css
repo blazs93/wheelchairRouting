@@ -135,3 +135,9 @@ a:hover{
 .hidden {
   visibility: hidden;
 }
+#spinner{
+	font-size: 550%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}

@@ -37,18 +37,26 @@ public class RouteController {
 	public String addNewRoute(@RequestParam String accessible, @RequestParam Long waypoint1,
 			@RequestParam Long waypoint2) {
 		Route route = new Route();
-		route.setAccessible(accessible);
 		List<Waypoint> waypoints = new ArrayList<Waypoint>();
 		waypoints.add(waypointRepository.getOne(waypoint1));
 		waypoints.add(waypointRepository.getOne(waypoint2));
 		
 		route.setSourceId(waypoint1);
 		route.setDestinationId(waypoint2);
-		if (accessible.equalsIgnoreCase("not accessible")) {
+		
+		String accessibleValue = "";
+		if(accessible.equalsIgnoreCase("bejárható")){
+			accessibleValue = "accessible";
+			route.setDistance(getDistance(waypoints.get(0), waypoints.get(1)));
+		} else if (accessible.equalsIgnoreCase("nem bejárható")) {
+			accessibleValue ="not accessible";
 			route.setDistance(getDistance(waypoints.get(0), waypoints.get(1)) * 1000);
 		} else {
+			accessibleValue= "not defined";
 			route.setDistance(getDistance(waypoints.get(0), waypoints.get(1)));
 		}
+		
+		route.setAccessible(accessibleValue);
 
 		routeRepository.save(route);
 		
