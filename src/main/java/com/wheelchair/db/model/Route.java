@@ -1,8 +1,5 @@
 package com.wheelchair.db.model;
 
-import java.util.List;
-
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,12 +37,6 @@ public class Route {
 		this.distance = distance;
 	}
 	
-	public Edge toEdge(){
-		//Edge edge = new Edge(this.getId()+"", waypoints.get(0).toVertex(), waypoints.get(1).toVertex(), distance);
-		//return edge;
-		return null;
-	}
-
 	public long getId() {
 		return id;
 	}

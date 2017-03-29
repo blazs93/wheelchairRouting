@@ -41,11 +41,4 @@ public class Waypoint {
 		this.longitude = longitude;
 	}
 	
-	public Vertex toVertex() {
-		 Vertex v = new Vertex(this.id, "Vertex of: " +this.id);
-		 v.setLatitude(latitude);
-		 v.setLongitude(longitude);
-		 return v;
-	}
-
 }
