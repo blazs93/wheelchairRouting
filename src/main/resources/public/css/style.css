@@ -1,143 +1,172 @@
- #map {
-  height: 100%;
-  margin-top: 55px;
+#map {
+	height: 100%;
+	margin-top: 55px;
 }
+
 html, body {
-  height: 96%;
-  margin: 0;
-  padding: 0;
+	height: 96%;
+	margin: 0;
+	padding: 0;
 }
+
 #floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
+	position: absolute;
+	top: 10px;
+	left: 25%;
+	z-index: 5;
+	background-color: #fff;
+	padding: 5px;
+	border: 1px solid #999;
+	text-align: center;
+	font-family: 'Roboto', 'sans-serif';
+	line-height: 30px;
+	padding-left: 10px;
 }
-#navbar{
+
+#navbar {
 	background-color: rgb(247, 186, 123);
 }
-.navbar-inverse{
+
+.navbar-inverse {
 	background-color: rgb(247, 186, 123);
 	border-color: rgb(247, 186, 123);
 }
-.container{
+
+.container {
 	width: 98%;
 }
-.form-group{
+
+.form-group {
 	margin-left: 0px;
 	margin-right: 0px;
 	padding: 5px;
 }
-.btn-primary{
+
+.btn-primary {
 	margin-left: 0px;
 	margin-right: 0px;
 	background-color: rgb(101, 180, 206);
 	border-color: rgb(101, 180, 206);
 }
-.btn-primary:hower{
+
+.btn-primary:hower {
 	background-color: #204d74;
-    border-color: #204d74;
-}
-.btn-primary:active{
-	background-color: #204d74;
-    border-color: #204d74;
-}
-.btn-primary:focus{
 	border-color: #204d74;
-    background-color: rgb(101, 180, 206);
 }
+
+.btn-primary:active {
+	background-color: #204d74;
+	border-color: #204d74;
+}
+
+.btn-primary:focus {
+	border-color: #204d74;
+	background-color: rgb(101, 180, 206);
+}
+
 .
-a{
-  color: white;
-}
-a:hover{
-  color: white;
-  text-decoration: none;
+a {
+	color: white;
 }
 
-#userTable{
-  margin-top: 100px;
-  margin-left: 50px;
-  width:90%;
+a:hover {
+	color: white;
+	text-decoration: none;
 }
 
-.controlUI{
-    direction: ltr;
-    overflow: hidden;
-    text-align: center;
-    position: relative;
-    color: rgb(86, 86, 86);
-    font-family: Roboto, Arial, sans-serif;
-    user-select: none;
-    font-size: 11px;
-    background-color: rgb(255, 255, 255);
-    padding: 8px;
-    border-bottom-right-radius: 2px;
-    border-top-right-radius: 2px;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
-    border-left: 0px;
-    min-width: 37px;
-    margin-top: 10px;
-    margin-left: 2px;
+#userTable {
+	margin-top: 100px;
+	margin-left: 50px;
+	width: 90%;
 }
-.controlUI:hover{
-    direction: ltr;
-    overflow: hidden;
-    text-align: center;
-    position: relative;
-    color: rgb(0, 0, 0);
-    font-family: Roboto, Arial, sans-serif;
-    user-select: none;
-    font-size: 11px;
-    background-color: rgb(235, 235, 235);
-    padding: 8px;
-    border-bottom-right-radius: 2px;
-    border-top-right-radius: 2px;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
-    border-left: 0px;
-    min-width: 37px;
+
+.controlUI {
+	direction: ltr;
+	overflow: hidden;
+	text-align: center;
+	position: relative;
+	color: rgb(86, 86, 86);
+	font-family: Roboto, Arial, sans-serif;
+	user-select: none;
+	font-size: 11px;
+	background-color: rgb(255, 255, 255);
+	padding: 8px;
+	border-bottom-right-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+	border-left: 0px;
+	min-width: 37px;
+	margin-top: 10px;
+	margin-left: 2px;
 }
-.controlUIactive{
-   direction: ltr;
-    overflow: hidden;
-    text-align: center;
-    position: relative;
-    color: rgb(0, 0, 0);
-    font-family: Roboto, Arial, sans-serif;
-    user-select: none;
-    font-size: 11px;
-    background-color: rgb(235, 235, 235);
-    padding: 8px;
-    border-bottom-right-radius: 2px;
-    border-top-right-radius: 2px;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
-    border-left: 0px;
-    min-width: 37px;
-    margin-top: 10px;
-    margin-left: 2px;
+
+.controlUI:hover {
+	direction: ltr;
+	overflow: hidden;
+	text-align: center;
+	position: relative;
+	color: rgb(0, 0, 0);
+	font-family: Roboto, Arial, sans-serif;
+	user-select: none;
+	font-size: 11px;
+	background-color: rgb(235, 235, 235);
+	padding: 8px;
+	border-bottom-right-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+	border-left: 0px;
+	min-width: 37px;
 }
-.customControlDiv{
+
+.controlUIactive {
+	direction: ltr;
+	overflow: hidden;
+	text-align: center;
+	position: relative;
+	color: rgb(0, 0, 0);
+	font-family: Roboto, Arial, sans-serif;
+	user-select: none;
+	font-size: 11px;
+	background-color: rgb(235, 235, 235);
+	padding: 8px;
+	border-bottom-right-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+	border-left: 0px;
+	min-width: 37px;
+	margin-top: 10px;
+	margin-left: 2px;
+}
+
+.customControlDiv {
 	margin-left: 10px;
 }
+
 .hidden {
-  visibility: hidden;
+	visibility: hidden;
 }
-#spinner{
+
+#spinner {
 	font-size: 550%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+#markerComment {
+	width: 80%;
+}
+
+#markerCommentButton {
+	float: right;
+}
+
+#markerPoiId {
+	visibility: hidden;
 }

@@ -16,7 +16,6 @@ public class PoiController {
 	@Autowired
 	private PoiRepository poiRepository;
 	
-	
 	@RequestMapping("/addPoi")
 	public String addNewPoi(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam String description, @RequestParam String accessible) {
 		Poi poi = new Poi();

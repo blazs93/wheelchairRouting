@@ -1,175 +1,223 @@
-	<!DOCTYPE html>
-	<html>
-	<head>
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-	<meta charset="utf-8">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="css/style.css" rel="stylesheet">
-  <script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-core.js"></script>
-  <script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-service.js"></script>
-  <script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.js"></script>
-  <script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-	<title>Wheelchair Routing</title>
-	</head>
-	<body>
-		
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-	            <span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	        </div>
-	        <div id="navbar" class="navbar-collapse collapse">
-	          <!-- <div class="navbar-form navbar-left form-group">
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="css/style.css" rel="stylesheet">
+<script type="text/javascript"
+	src="https://js.cit.api.here.com/v3/3.0/mapsjs-core.js"></script>
+<script type="text/javascript"
+	src="https://js.cit.api.here.com/v3/3.0/mapsjs-service.js"></script>
+<script type="text/javascript"
+	src="https://js.cit.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+<script type="text/javascript"
+	src="https://js.cit.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+<title>Wheelchair Routing</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<!-- <div class="navbar-form navbar-left form-group">
 	            <input type="text" placeholder="Search" class="form-control">
 	          </div>
 	          <div class="navbar-form navbar-left form-group">
 	           	<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" /></button>
 	          </div> -->
-	          <div class="navbar-form navbar-left form-group">
-	          	<input id="from" type="text" placeholder="Honnan" class="form-control">
-	          </div>
-	          <div class="navbar-form navbar-left form-group">
-	            <input id="to" type="text" placeholder="Hová" class="form-control">
-	          </div>
-	          <div class="navbar-form navbar-left form-group">
-	           	<button id="search" class="btn btn-primary"><span class="glyphicon glyphicon-search" /></button>
-	          </div>
-	          <form id="loginButton" action="/login.html" class="navbar-form navbar-right form-group">
-	        	<button class="btn btn-primary">Belépés</button>
-	          </form>
-	          <form id="logoutButton" action="/logout" class="navbar-form navbar-right form-group">
-	        	<button class="btn btn-primary">Kilépés</button>
-	          </form>
-	          <form id="registrationButton" action="/registration.html" class="navbar-form navbar-right form-group">
-	           <button class="btn btn-primary">Regisztráció</button>
-	          </form >
-	          <form id="usersForm" action="/users.html" class="navbar-form navbar-right form-group">
-	            <button class="btn btn-primary">Adminisztráció</button>
-	       	   </form>
-	        </div>
-	      </div>
-	    </nav>
-		<div id="map"></div>
-		<i id="spinner" class="fa fa-spinner fa-spin"></i>
-		
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  			<div class="modal-dialog" role="document">
-    			<div class="modal-content">
-      				<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        				<h4 class="modal-title" id="myModalLabel">POI hozzáadása</h4>
-      				</div>
-      				<div class="modal-body">
-      					<form action='/addPoi' method="GET">
-  							<div class="form-group">
-    							<label for="latitude">Latitude</label>
-    							<input id="latitude" name="latitude" type="text" placeholder="Latitude" class="form-control">
-  							</div>
-  						
-  							<div class="form-group">
-    							<label for="longitude">Longitude</label>
-    							<input id="longitude" name="longitude" type="text" placeholder="Longitude" class="form-control">
-  							</div>
-  							<div class="form-group">
-    							<label for="description">Leírás</label>
-    							<textarea class="form-control" id="description" name="description" rows="3"></textarea>
-  							</div>
-  							<div class="form-group">
-    							<label for="accessible">Bejárhatóság</label>
-    							<select class="form-control" id="accessible" name="accessible">
-    								<option>Nincs meghatározva</option>
-  									<option>Bejárható</option>
-  									<option>Nem bejárható</option>
-    							</select>
-  							</div>
-  							<button type="submit" class="btn btn-primary">Mentés</button>
-  							<button type="button" class="btn btn-primary" data-dismiss="modal">Bezárás</button>
-						</form>
-     				</div>
-    			</div>
-  			</div>
+				<div class="navbar-form navbar-left form-group">
+					<input id="from" type="text" placeholder="Honnan"
+						class="form-control">
+				</div>
+				<div class="navbar-form navbar-left form-group">
+					<input id="to" type="text" placeholder="Hová" class="form-control">
+				</div>
+				<div class="navbar-form navbar-left form-group">
+					<button id="search" class="btn btn-primary">
+						<span class="glyphicon glyphicon-search" />
+					</button>
+				</div>
+				<form id="loginButton" action="/login.html"
+					class="navbar-form navbar-right form-group">
+					<button class="btn btn-primary">Belépés</button>
+				</form>
+				<form id="logoutButton" action="/logout"
+					class="navbar-form navbar-right form-group">
+					<button class="btn btn-primary">Kilépés</button>
+				</form>
+				<form id="registrationButton" action="/registration.html"
+					class="navbar-form navbar-right form-group">
+					<button class="btn btn-primary">Regisztráció</button>
+				</form>
+				<form id="usersForm" action="/users.html"
+					class="navbar-form navbar-right form-group">
+					<button class="btn btn-primary">Adminisztráció</button>
+				</form>
+			</div>
 		</div>
+	</nav>
+	<div id="map"></div>
+	<i id="spinner" class="fa fa-spinner fa-spin"></i>
 
-    <div class="modal fade" id="waypointModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Kereszteződés hozzáadása</h4>
-              </div>
-              <div class="modal-body">
-                <form action='/addWaypoint' method="GET">
-                <div class="form-group">
-                  <label for="waypointLatitude">Latitude</label>
-                  <input id="waypointLatitude" name="waypointLatitude" type="text" placeholder="Latitude" class="form-control">
-                </div>
-              
-                <div class="form-group">
-                  <label for="waypointLongitude">Longitude</label>
-                  <input id="waypointLongitude" name="waypointLongitude" type="text" placeholder="Longitude" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-primary">Mentés</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Bezárás</button>
-            </form>
-            </div>
-          </div>
-        </div>
-    </div>
-		
-		<div class="modal fade" id="markerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  			<div class="modal-dialog" role="document">
-    			<div class="modal-content">
-      				<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        				<h4 class="modal-title" id="myModalLabel">POI</h4>
-      				</div>
-      				<div class="modal-body">
-      					<h5><span id="markerDescription"></span></h5>
-      					<h5><span id="markerAccessible"></span></h5>
-      					<button type="button" class="btn btn-primary" data-dismiss="modal">Bezárás</button>
-     				</div>
-    			</div>
-  			</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">POI hozzáadása</h4>
+				</div>
+				<div class="modal-body">
+					<form action='/addPoi' method="GET">
+						<div class="form-group">
+							<label for="latitude">Latitude</label> <input id="latitude"
+								name="latitude" type="text" placeholder="Latitude"
+								class="form-control">
+						</div>
+
+						<div class="form-group">
+							<label for="longitude">Longitude</label> <input id="longitude"
+								name="longitude" type="text" placeholder="Longitude"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="description">Leírás</label>
+							<textarea class="form-control" id="description"
+								name="description" rows="3"></textarea>
+						</div>
+						<div class="form-group">
+							<label for="accessible">Bejárhatóság</label> <select
+								class="form-control" id="accessible" name="accessible">
+								<option>Nincs meghatározva</option>
+								<option>Bejárható</option>
+								<option>Nem bejárható</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary">Mentés</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Bezárás</button>
+					</form>
+				</div>
+			</div>
 		</div>
-		
-		<div class="modal fade" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  			<div class="modal-dialog" role="document">
-    			<div class="modal-content">
-      				<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        				<h4 class="modal-title" id="myModalLabel">Út hozzáadása</h4>
-      				</div>
-      				<div class="modal-body">
-      					<form action='/addRoute' method="GET">
-  							<div class="form-group">
-                  <input class = "" id="waypoint1" name="waypoint1"></input>
-                  <input class = "" id="waypoint2" name="waypoint2"></input>
-    							<label for="accessible">Bejárhatóság</label>
-    							<select class="form-control" id="accessible" name="accessible">
-    								<option>Nem meghatározott</option>
-  									<option>Bejárható</option>
-  									<option>Nem bejárható</option>
-    							</select>
-  							</div>
-  							<button type="submit" class="btn btn-primary">Mentés</button>
-  							<button type="button" class="btn btn-primary" data-dismiss="modal">Bezárás</button>
-						</form>
-     				</div>
-    			</div>
-  			</div>
+	</div>
+
+	<div class="modal fade" id="waypointModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Kereszteződés
+						hozzáadása</h4>
+				</div>
+				<div class="modal-body">
+					<form action='/addWaypoint' method="GET">
+						<div class="form-group">
+							<label for="waypointLatitude">Latitude</label> <input
+								id="waypointLatitude" name="waypointLatitude" type="text"
+								placeholder="Latitude" class="form-control">
+						</div>
+
+						<div class="form-group">
+							<label for="waypointLongitude">Longitude</label> <input
+								id="waypointLongitude" name="waypointLongitude" type="text"
+								placeholder="Longitude" class="form-control">
+						</div>
+						<button type="submit" class="btn btn-primary">Mentés</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Bezárás</button>
+					</form>
+				</div>
+			</div>
 		</div>
-		
-		
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYlTbZ6fNPtubHnh0s14PjdVi39wX5eDU&libraries=drawing&callback=initMap"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="js/script.js"></script>
-		<script src="js/spinner.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-	</body>
-	</html>
+	</div>
+
+	<div class="modal fade" id="markerModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">POI</h4>
+				</div>
+				<div class="modal-body">
+					<h5>
+						<span id="markerDescription"></span>
+					</h5>
+					<h5>
+						<span id="markerAccessible"></span>
+					</h5>
+					<textarea id="markerComment"></textarea>
+					<button id="markerCommentButton" type="button" class="btn btn-primary">Komment</button>
+					<p id="markerPoiId">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Bezárás</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="routeModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Út hozzáadása</h4>
+				</div>
+				<div class="modal-body">
+					<form action='/addRoute' method="GET">
+						<div class="form-group">
+							<input class="" id="waypoint1" name="waypoint1"></input> <input
+								class="" id="waypoint2" name="waypoint2"></input> <label
+								for="accessible">Bejárhatóság</label> <select
+								class="form-control" id="accessible" name="accessible">
+								<option>Nem meghatározott</option>
+								<option>Bejárható</option>
+								<option>Nem bejárható</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary">Mentés</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Bezárás</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYlTbZ6fNPtubHnh0s14PjdVi39wX5eDU&libraries=drawing&callback=initMap"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/spinner.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

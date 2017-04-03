@@ -51,4 +51,8 @@ public class Poi {
 		this.acc = accessible;
 	}
 
+	public long getPoiId() {
+		return poiId;
+	}
+
 }

@@ -31,5 +31,12 @@ public class MainController {
 		String role = auth.getAuthorities().toString();
 		return role;
 	}
+	
+	@GetMapping(path = "/getLogin")
+	public @ResponseBody String getLogin() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String login = auth.getName();
+		return login;
+	}
 
 }

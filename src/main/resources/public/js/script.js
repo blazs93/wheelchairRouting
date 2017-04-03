@@ -11,6 +11,7 @@ var directionsService;
 var directionsDisplay;
 var routePointCounter = 0;
 var waypoints = [];
+var loginName = "";
 
 //roles
 var ROLE_ADMIN = "[ROLE_ADMIN]";
@@ -66,6 +67,10 @@ $(document).ready(
   } else {
    alert(status);
  }
+});
+
+$.get("getLogin", function(data, status) {
+    loginName = data;
 });
 
 function codeAddress() {
@@ -489,7 +494,8 @@ function initMap() {
           map : map,
           icon: icon,
           title : point.description,
-          accessible: point.accessible
+          accessible: point.accessible,
+          poiId: point.poiId
         });
         marker.id=point.latitude+point.longitude;
         MY.markers[i] = marker;
@@ -506,7 +512,27 @@ function initMap() {
               acc = NOT_DEFINED_HUN;
           }
           $('#markerDescription').text(element.title);
-          $('#markerAccessible').text(acc);      
+          $('#markerAccessible').text(acc);
+          $('#markerPoiId').text(element.poiId);  
+
+          $.get('/getComments', 
+              { 
+                poiId: $('#markerPoiId').text()
+              }, 
+              function(data) {
+                
+          });
+
+          $( "#markerCommentButton" ).click(function() {
+             $.get('/addComment', 
+              { poiId: $('#markerPoiId').text(),
+                username: loginName,
+                content: $('#markerComment').val()
+              }, 
+              function(data) {
+                $('#markerModal').modal('hide');
+            });
+          });
         });
       });
     }
