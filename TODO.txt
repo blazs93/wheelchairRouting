@@ -1,0 +1,7 @@
+TODO:
+.	magyarítás
+.	admin menü nagyobb
+.	POI kinézet	
+.	POI form
+.	út form
+.	komment POI-hoz
