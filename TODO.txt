@@ -1,7 +1,8 @@
 TODO:
-.	magyarítás
+.	magyarítás--
 .	admin menü nagyobb
 .	POI kinézet	
 .	POI form
 .	út form
-.	komment POI-hoz
+.	komment POI-hoz ??
+.	akadálymentesítési elvek betartása

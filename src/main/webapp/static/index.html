@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <meta charset="utf-8">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet"
@@ -47,7 +46,7 @@
 				</div>
 				<div class="navbar-form navbar-left form-group">
 					<button id="search" class="btn btn-primary">
-						<span class="glyphicon glyphicon-search" />
+						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</div>
 				<form id="loginButton" action="/login.html"
@@ -72,8 +71,7 @@
 	<div id="map"></div>
 	<i id="spinner" class="fa fa-spinner fa-spin"></i>
 
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -81,7 +79,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">POI hozzáadása</h4>
+					<h4 class="modal-title">POI hozzáadása</h4>
 				</div>
 				<div class="modal-body">
 					<form action='/addPoi' method="GET">
@@ -103,7 +101,7 @@
 						</div>
 						<div class="form-group">
 							<label for="accessible">Bejárhatóság</label> <select
-								class="form-control" id="accessible" name="accessible">
+								class="form-control" id="acc" name="accessible">
 								<option>Nincs meghatározva</option>
 								<option>Bejárható</option>
 								<option>Nem bejárható</option>
@@ -117,8 +115,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="waypointModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
+	<div class="modal fade" id="waypointModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -126,7 +123,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Kereszteződés
+					<h4 class="modal-title">Kereszteződés
 						hozzáadása</h4>
 				</div>
 				<div class="modal-body">
@@ -150,8 +147,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="markerModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
+	<div class="modal fade" id="markerModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -159,15 +155,11 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">POI</h4>
+					<h4 class="modal-title">POI</h4>
 				</div>
 				<div class="modal-body">
-					<h5>
-						<span id="markerDescription"></span>
-					</h5>
-					<h5>
-						<span id="markerAccessible"></span>
-					</h5>
+					<p id="markerDescription"></p>
+					<p id="markerAccessible"></p>
 					<textarea id="markerComment"></textarea>
 					<button id="markerCommentButton" type="button" class="btn btn-primary">Komment</button>
 					<p id="markerPoiId">
@@ -180,8 +172,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="routeModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
+	<div class="modal fade" id="routeModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -189,13 +180,14 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Út hozzáadása</h4>
+					<h4 class="modal-title">Út hozzáadása</h4>
 				</div>
 				<div class="modal-body">
 					<form action='/addRoute' method="GET">
 						<div class="form-group">
-							<input class="" id="waypoint1" name="waypoint1"></input> <input
-								class="" id="waypoint2" name="waypoint2"></input> <label
+							<input class="" id="waypoint1" name="waypoint1"/>
+							<input class="" id="waypoint2" name="waypoint2"/>
+							<label
 								for="accessible">Bejárhatóság</label> <select
 								class="form-control" id="accessible" name="accessible">
 								<option>Nem meghatározott</option>
