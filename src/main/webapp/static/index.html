@@ -25,12 +25,13 @@
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 				</button>
 			</div>
-			<div id="navbar" class="navbar-collapse collapse">
+			<div id="navbar" class="navbar-collapse collapse" role = "menu">
 				<!-- <div class="navbar-form navbar-left form-group">
 	            <input type="text" placeholder="Search" class="form-control">
 	          </div>
@@ -72,7 +73,7 @@
 	<i id="spinner" class="fa fa-spinner fa-spin"></i>
 
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
@@ -83,15 +84,20 @@
 				</div>
 				<div class="modal-body">
 					<form action='/addPoi' method="GET">
-						<div class="form-group">
+						<div class="form-group hidden">
 							<label for="latitude">Latitude</label> <input id="latitude"
 								name="latitude" type="text" placeholder="Latitude"
 								class="form-control">
 						</div>
 
-						<div class="form-group">
+						<div class="form-group hidden">
 							<label for="longitude">Longitude</label> <input id="longitude"
 								name="longitude" type="text" placeholder="Longitude"
+								class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="longitude">Cím</label> <input id="title"
+								name="title" type="text" placeholder="Cím"
 								class="form-control">
 						</div>
 						<div class="form-group">
@@ -116,7 +122,7 @@
 	</div>
 
 	<div class="modal fade" id="waypointModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
@@ -131,13 +137,13 @@
 						<div class="form-group">
 							<label for="waypointLatitude">Latitude</label> <input
 								id="waypointLatitude" name="waypointLatitude" type="text"
-								placeholder="Latitude" class="form-control">
+								placeholder="Latitude" class="form-control" readonly>
 						</div>
 
 						<div class="form-group">
 							<label for="waypointLongitude">Longitude</label> <input
 								id="waypointLongitude" name="waypointLongitude" type="text"
-								placeholder="Longitude" class="form-control">
+								placeholder="Longitude" class="form-control" readonly>
 						</div>
 						<button type="submit" class="btn btn-primary">Mentés</button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal">Bezárás</button>
@@ -148,21 +154,23 @@
 	</div>
 
 	<div class="modal fade" id="markerModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">POI</h4>
+					<h4 class="modal-title" id="markerTitle">POI</h4>
 				</div>
 				<div class="modal-body">
-					<p id="markerDescription"></p>
+					<div class = "poiDiv">
+						<p id="markerDescription"></p>
+					</div>
 					<p id="markerAccessible"></p>
-					<textarea id="markerComment"></textarea>
+					<!--<textarea id="markerComment"></textarea>
 					<button id="markerCommentButton" type="button" class="btn btn-primary">Komment</button>
-					<p id="markerPoiId">
+					<p id="markerPoiId">-->
 
 				</div>
 				<div class="modal-footer">
@@ -173,7 +181,7 @@
 	</div>
 
 	<div class="modal fade" id="routeModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
@@ -185,8 +193,8 @@
 				<div class="modal-body">
 					<form action='/addRoute' method="GET">
 						<div class="form-group">
-							<input class="" id="waypoint1" name="waypoint1"/>
-							<input class="" id="waypoint2" name="waypoint2"/>
+							<input class="hidden" id="waypoint1" name="waypoint1"/>
+							<input class="hidden" id="waypoint2" name="waypoint2"/>
 							<label
 								for="accessible">Bejárhatóság</label> <select
 								class="form-control" id="accessible" name="accessible">

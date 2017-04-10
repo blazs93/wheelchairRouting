@@ -265,7 +265,7 @@ function CustomControl(controlDiv, map) {
       addPOIButton.setAttribute("class", "controlUIactive");
       addPOIButton.title = CANCEL_ADD_NEW_POI;
       google.maps.event.addListener(map, 'click', function(event) {
-        $('#myModal').modal('show');
+        $('#myModal').modal({backdrop: "static"});
         $('#latitude').val(event.latLng.lat());
         $('#longitude').val(event.latLng.lng());
       });
@@ -298,7 +298,7 @@ function CustomControl(controlDiv, map) {
       addWaypointButton.title = 'Kereszteződés hozzáadás elvetése';
       google.maps.event.addListener(map, 'click', function(event) {
         //todo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        $('#waypointModal').modal('show');
+        $('#waypointModal').modal({backdrop: "static"});
         $('#waypointLatitude').val(event.latLng.lat());
         $('#waypointLongitude').val(event.latLng.lng());
       });
@@ -334,11 +334,11 @@ function CustomControl(controlDiv, map) {
       initPoly();
       poly.setMap(map);
       map.addListener('click', addLatLng);
-      controlDiv.appendChild(addRouteReadyButton);
+      //controlDiv.appendChild(addRouteReadyButton);
     } else {
       poly.setMap(null);
       poly = null;
-      controlDiv.removeChild(addRouteReadyButton);
+      //controlDiv.removeChild(addRouteReadyButton);
       addRouteButton.setAttribute("class", "controlUI");
       addRouteButton.title = 'Új út hozzáadása';
       google.maps.event.clearListeners(map, 'click');
@@ -346,15 +346,15 @@ function CustomControl(controlDiv, map) {
   });
 
   //Add route ready button
-  var addRouteReadyButton = document.createElement('button');
-  addRouteReadyButton.setAttribute("class", "controlUI");
-  addRouteReadyButton.title = 'Út kész!';
+  //var addRouteReadyButton = document.createElement('button');
+  //addRouteReadyButton.setAttribute("class", "controlUI");
+  //addRouteReadyButton.title = 'Út kész!';
 
-  var routeReady = document.createElement('span');
-  routeReady.setAttribute("class", "glyphicon glyphicon-ok");
-  addRouteReadyButton.appendChild(routeReady);
+  //var routeReady = document.createElement('span');
+  //routeReady.setAttribute("class", "glyphicon glyphicon-ok");
+  //addRouteReadyButton.appendChild(routeReady);
 
-  google.maps.event.addDomListener(addRouteReadyButton, 'click', routeReadyFunc);
+  //google.maps.event.addDomListener(addRouteReadyButton, 'click', routeReadyFunc);
 
 }
 
@@ -377,7 +377,7 @@ function routeReadyFunc() {
   $('#waypoint1').val(waypoints[0]);
   $('#waypoint2').val(waypoints[1]);
   //$('#jsonRoute').text(points);
-  $('#routeModal').modal('show');
+  $('#routeModal').modal({backdrop: "static"});
   waypoints = [];
 }
 
@@ -460,7 +460,7 @@ function initMap() {
             fillOpacity: 1,
             map: map,
             center: myLatLng,
-            radius: 5
+            radius: 3
           });
       }
     
@@ -493,16 +493,18 @@ function initMap() {
           position : myLatLng,
           map : map,
           icon: icon,
-          title : point.description,
+          title : point.title,
           accessible: point.accessible,
-          poiId: point.poiId
+          poiId: point.poiId,
+          description: point.description
+
         });
         marker.id=point.latitude+point.longitude;
         MY.markers[i] = marker;
       }
       MY.markers.forEach(function (element){
         google.maps.event.addDomListener(element, 'click', function() {
-          $('#markerModal').modal('show');
+          $('#markerModal').modal({backdrop: "static"});
           var acc = "";
           if (element.accessible == ACCESSIBLE) {
               acc = ACCESSIBLE_HUN;
@@ -511,28 +513,33 @@ function initMap() {
           } else {
               acc = NOT_DEFINED_HUN;
           }
-          $('#markerDescription').text(element.title);
+          $('#markerDescription').text(element.description);
+          if(element.title != null) {
+            $('#markerTitle').text(element.title);
+          } else {
+            $('#markerTitle').text("POI");
+          }
           $('#markerAccessible').text(acc);
           $('#markerPoiId').text(element.poiId);  
 
-          $.get('/getComments', 
-              { 
-                poiId: $('#markerPoiId').text()
-              }, 
-              function(data) {
+          //$.get('/getComments', 
+          //    { 
+          //     poiId: $('#markerPoiId').text()
+          //    }, 
+          //    function(data) {
                 
-          });
+          //});
 
-          $( "#markerCommentButton" ).click(function() {
-             $.get('/addComment', 
-              { poiId: $('#markerPoiId').text(),
-                username: loginName,
-                content: $('#markerComment').val()
-              }, 
-              function(data) {
-                $('#markerModal').modal('hide');
-            });
-          });
+          //$( "#markerCommentButton" ).click(function() {
+          //   $.get('/addComment', 
+          //    { poiId: $('#markerPoiId').text(),
+          //      username: loginName,
+          //      content: $('#markerComment').val()
+          //    }, 
+          //    function(data) {
+          //      $('#markerModal').modal('hide');
+          //  });
+          //});
         });
       });
     }

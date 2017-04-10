@@ -1,9 +1,11 @@
 	<!DOCTYPE html>
 	<html>	
 	<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<meta charset="utf-8">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
+	<link href="css/users.css" rel="stylesheet">
 	
 	<title>Wheelchair Routing Adminisztráció</title>
 	</head>
@@ -32,13 +34,30 @@
 	   <table id="userTable" class="table">
 	   	 <thead>
                 <tr>
-                  <th>Login</th>
-                  <th>Aktív</th>
+                  <th class="th">Login</th>
+                  <th class="th">Aktív</th>
                 </tr>
               </thead>
-              <tbody id="userTableBody">
+              <tbody id="userTableBody" class="tb">
               </tbody>
 	   </table>
+
+	   <div class="modal fade" id="successModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Sikeres módosítás</h4>
+				</div>
+				<div class="modal-body">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>

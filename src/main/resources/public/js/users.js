@@ -3,7 +3,7 @@ window.MY = {};
 MY.users = [];
 
 $(document).ready(function() {
-    $.get("request/user", function(data, status) {
+    $.get("/user", function(data, status) {
         if (status == "success") {
         	MY.users = data;
             var table = document.getElementById('userTableBody');
@@ -31,12 +31,12 @@ $(document).ready(function() {
                     var active = !element[1];
                     element[1] = !element[1];
                     var username = element[0];
-                    $.get("request/updateUser", 
+                    $.get("/updateUser", 
                         { "active": active,
                           "username":username
                         }, function(data, status) {
                         if (status == "success") {
-                            alert(status);
+                            $('#successModal').modal('show');
                         }
                         else{
                             alert(status);

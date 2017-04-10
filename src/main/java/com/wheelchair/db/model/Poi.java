@@ -17,6 +17,7 @@ public class Poi {
 	private Double longitude;
 	private String description;
 	private String acc;
+	private String title;
 
 	public Double getLatitude() {
 		return latitude;
@@ -53,6 +54,14 @@ public class Poi {
 
 	public long getPoiId() {
 		return poiId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

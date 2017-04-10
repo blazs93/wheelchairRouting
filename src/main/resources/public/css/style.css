@@ -88,7 +88,7 @@ a:hover {
 	color: rgb(86, 86, 86);
 	font-family: Roboto, Arial, sans-serif;
 	user-select: none;
-	font-size: 11px;
+	font-size: 120%;
 	background-color: rgb(255, 255, 255);
 	padding: 8px;
 	border-bottom-right-radius: 2px;
@@ -110,7 +110,7 @@ a:hover {
 	color: rgb(0, 0, 0);
 	font-family: Roboto, Arial, sans-serif;
 	user-select: none;
-	font-size: 11px;
+	font-size: 120%;
 	background-color: rgb(235, 235, 235);
 	padding: 8px;
 	border-bottom-right-radius: 2px;
@@ -130,7 +130,7 @@ a:hover {
 	color: rgb(0, 0, 0);
 	font-family: Roboto, Arial, sans-serif;
 	user-select: none;
-	font-size: 11px;
+	font-size: 120%;
 	background-color: rgb(235, 235, 235);
 	padding: 8px;
 	border-bottom-right-radius: 2px;
@@ -169,4 +169,14 @@ a:hover {
 
 #markerPoiId {
 	visibility: hidden;
+}
+
+.hidden{
+	visibility: hidden;
+}
+
+.poiDiv{
+	padding: 5px;
+    background: #f5f5f5;
+    font-size: 120%;
 }

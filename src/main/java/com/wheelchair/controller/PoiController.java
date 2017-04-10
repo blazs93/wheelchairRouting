@@ -17,11 +17,12 @@ public class PoiController {
 	private PoiRepository poiRepository;
 	
 	@RequestMapping("/addPoi")
-	public String addNewPoi(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam String description, @RequestParam String accessible) {
+	public String addNewPoi(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam String description, @RequestParam String accessible, @RequestParam String title) {
 		Poi poi = new Poi();
 		poi.setLatitude(latitude);
 		poi.setLongitude(longitude);
 		poi.setDescription(description);
+		poi.setTitle(title);
 		String accessibleValue = "";
 		if(accessible.equalsIgnoreCase("bejárható")){
 			accessibleValue = "accessible";
