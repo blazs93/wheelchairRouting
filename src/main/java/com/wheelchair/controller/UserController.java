@@ -1,6 +1,7 @@
 package com.wheelchair.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +31,9 @@ public class UserController {
 		User user = new User();
 		user.setActive(true);
 		user.setUsername(username);
-		user.setPassword(password);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hashedPassword = passwordEncoder.encode(password);
+		user.setPassword(hashedPassword);
 		user.setName(name);
 
 		UserRole userRole = new UserRole();
