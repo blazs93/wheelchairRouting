@@ -1,0 +1,22 @@
+.th{
+	font-size: 130%;
+}
+
+.tb{
+	font-size: 130%;
+}
+
+.table {
+	margin-left: 50px;
+	width: 90%;
+}
+
+.tableTitle {
+	margin-left: 50px;
+	margin-top: 80px;
+}
+
+.customCheckbox {
+	transform: scale(2);
+	margin-left: 100px;
+}

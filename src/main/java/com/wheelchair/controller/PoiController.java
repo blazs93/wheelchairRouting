@@ -17,21 +17,14 @@ public class PoiController {
 	private PoiRepository poiRepository;
 	
 	@RequestMapping("/addPoi")
-	public String addNewPoi(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam String description, @RequestParam String accessible, @RequestParam String title) {
+	public String addNewPoi(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam String description, @RequestParam String accessible, @RequestParam String name) {
 		Poi poi = new Poi();
 		poi.setLatitude(latitude);
 		poi.setLongitude(longitude);
 		poi.setDescription(description);
-		poi.setTitle(title);
-		String accessibleValue = "";
-		if(accessible.equalsIgnoreCase("bejárható")){
-			accessibleValue = "accessible";
-		} else if (accessible.equalsIgnoreCase("nem bejárható")) {
-			accessibleValue ="not accessible";
-		} else {
-			accessibleValue= "not defined";
-		}
-		poi.setAccessible(accessibleValue);
+		poi.setName(name);
+		poi.setActive(false);
+		poi.setAccessible(accessible);
 		poiRepository.save(poi);
 		
 		return "redirect:/index.html";  
@@ -42,8 +35,38 @@ public class PoiController {
 		return poiRepository.findAll();
 	}
 	
+	@GetMapping(path = "/allActivePoi")
+	public @ResponseBody Iterable<Poi> getAllActivePois() {
+		return poiRepository.findActivePois();
+	}
+	
 	@GetMapping(path = "/getClosestPoi")
 	public @ResponseBody Iterable<Poi> getClosestPoi(@RequestParam Double latitude, @RequestParam Double longitude) {
 		return poiRepository.findClosest(latitude, longitude);
+	}
+	
+	@RequestMapping("/deletePoi")
+	public String deletePoi(@RequestParam Long id) {
+		poiRepository.delete(poiRepository.getOne(id));
+		
+		return "redirect:/admin.html";  
+	}
+	
+	@RequestMapping("/activatePoi")
+	public String activatePoi(@RequestParam Boolean active, @RequestParam Long poiId) {
+		poiRepository.updatePoiActive(active, poiId);
+		return "redirect:/admin.html";  
+	}
+	
+	@RequestMapping("/updatePoi")
+	public String updatePoi(@RequestParam Long poiId, @RequestParam Double latitude, @RequestParam Double longitude, @RequestParam String description, @RequestParam String accessible, @RequestParam String name) {
+		Poi p = poiRepository.getOne(poiId);
+		p.setAccessible(accessible);
+		p.setDescription(description);
+		p.setLatitude(latitude);
+		p.setLongitude(longitude);
+		p.setName(name);
+		poiRepository.save(p);
+		return "redirect:/admin.html";
 	}
 }

@@ -35,39 +35,30 @@ public class RouteController {
 
 		route.setSourceId(waypoint1);
 		route.setDestinationId(waypoint2);
+		route.setAccessible(accessible);
 
-		String accessibleValue = "";
-		if (accessible.equalsIgnoreCase("bejárható")) {
-			accessibleValue = "accessible";
-			route.setDistance(getDistance(waypoints.get(0).getLatitude(), waypoints.get(0).getLongitude(),
-					waypoints.get(1).getLatitude(), waypoints.get(1).getLongitude()));
-		} else if (accessible.equalsIgnoreCase("nem bejárható")) {
-			accessibleValue = "not accessible";
+		//Route route2 = new Route();
+		//route2.setAccessible(accessible);
+		//route2.setSourceId(waypoint2);
+		//route2.setDestinationId(waypoint1);
+
+		if (accessible.equalsIgnoreCase("nem bejárható")) {
+
 			route.setDistance(getDistance(waypoints.get(0).getLatitude(), waypoints.get(0).getLongitude(),
 					waypoints.get(1).getLatitude(), waypoints.get(1).getLongitude()) * 1000);
+
+			//route2.setDistance(getDistance(waypoints.get(0).getLatitude(), waypoints.get(0).getLongitude(),
+			//		waypoints.get(1).getLatitude(), waypoints.get(1).getLongitude()) * 1000);
 		} else {
-			accessibleValue = "not defined";
+
 			route.setDistance(getDistance(waypoints.get(0).getLatitude(), waypoints.get(0).getLongitude(),
 					waypoints.get(1).getLatitude(), waypoints.get(1).getLongitude()));
+			//route2.setDistance(getDistance(waypoints.get(0).getLatitude(), waypoints.get(0).getLongitude(),
+			//		waypoints.get(1).getLatitude(), waypoints.get(1).getLongitude()));
 		}
-
-		route.setAccessible(accessibleValue);
 
 		routeRepository.save(route);
-
-		Route route2 = new Route();
-		route2.setAccessible(accessibleValue);
-		route2.setSourceId(waypoint2);
-		route2.setDestinationId(waypoint1);
-		if (accessible.equalsIgnoreCase("not accessible")) {
-			route2.setDistance(getDistance(waypoints.get(0).getLatitude(), waypoints.get(0).getLongitude(),
-					waypoints.get(1).getLatitude(), waypoints.get(1).getLongitude()) * 1000);
-		} else {
-			route2.setDistance(getDistance(waypoints.get(0).getLatitude(), waypoints.get(0).getLongitude(),
-					waypoints.get(1).getLatitude(), waypoints.get(1).getLongitude()));
-		}
-
-		routeRepository.save(route2);
+		//routeRepository.save(route2);
 
 		return "redirect:/index.html";
 	}
@@ -116,7 +107,7 @@ public class RouteController {
 	public @ResponseBody Iterable<Waypoint> routing(@RequestParam Long waypoint1, @RequestParam Long waypoint2) {
 		Graph.vertexes.clear();
 		List<Route> routes = routeRepository.findAll();
-		Graph.Edge[] edges = new Graph.Edge[routes.size()];
+		List<Graph.Edge> edges = new ArrayList<Graph.Edge>();
 
 		// Fontos az élekben a csúcsok sorrendje!! Az adatbázis növekvően
 		// tárolja, azért megfordulhatnak a csúcsok sorrendjei -> elcsesz
@@ -124,7 +115,8 @@ public class RouteController {
 
 		for (int i = 0; i < routes.size(); i++) {
 			Route r = routes.get(i);
-			edges[i] = (new Graph.Edge(r.getSourceId().toString(), r.getDestinationId().toString(), r.getDistance()));
+			edges.add(new Graph.Edge(r.getSourceId().toString(), r.getDestinationId().toString(), r.getDistance()));
+			edges.add(new Graph.Edge(r.getDestinationId().toString(), r.getSourceId().toString(), r.getDistance()));
 		}
 
 		Waypoint source = waypointRepository.getOne(waypoint1);

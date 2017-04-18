@@ -16,7 +16,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/").setViewName("index");
 		registry.addViewController("/login.html").setViewName("login");
 		registry.addViewController("/registration.html").setViewName("registration");
-		registry.addViewController("/users.html").setViewName("users");
+		registry.addViewController("/admin.html").setViewName("admin");
 	}
 
 	@Bean(name = "dataSource")

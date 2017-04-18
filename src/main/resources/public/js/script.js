@@ -27,9 +27,9 @@ var ADD_NEW_POI = "Új POI hozzáadása";
 var CANCEL_ADD_NEW_POI = "POI hozzáadás elvetése";
 
 //accessible
-var ACCESSIBLE = "accessible";
-var NOT_ACCESSIBLE = "not accessible";
-var NOT_DEFINED = "not defined";
+var ACCESSIBLE = "Bejárható";
+var NOT_ACCESSIBLE = "Nem bejárható";
+var NOT_DEFINED = "Nem meghatározott";
 
 var ACCESSIBLE_HUN = "Állapot: Bejárható";
 var NOT_ACCESSIBLE_HUN = "Állapot: Nem bejárható";
@@ -471,7 +471,7 @@ function initMap() {
   });
 
   //Add POIs
-  $.get("/allPoi", function(data, status) {
+  $.get("/allActivePoi", function(data, status) {
     if (status == "success") {
       var pois = data;
       var latitude;
@@ -493,7 +493,7 @@ function initMap() {
           position : myLatLng,
           map : map,
           icon: icon,
-          title : point.title,
+          name : point.name,
           accessible: point.accessible,
           poiId: point.poiId,
           description: point.description
@@ -514,8 +514,8 @@ function initMap() {
               acc = NOT_DEFINED_HUN;
           }
           $('#markerDescription').text(element.description);
-          if(element.title != null) {
-            $('#markerTitle').text(element.title);
+          if(element.name != null) {
+            $('#markerTitle').text(element.name);
           } else {
             $('#markerTitle').text("POI");
           }
@@ -569,7 +569,7 @@ function initMap() {
           path: points,
           geodesic: true,
           strokeColor: color,
-          strokeOpacity: 0.05,
+          strokeOpacity: 0.2,
           strokeWeight: 10
         });
 

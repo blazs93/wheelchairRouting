@@ -17,7 +17,8 @@ public class Poi {
 	private Double longitude;
 	private String description;
 	private String acc;
-	private String title;
+	private String name;
+	private boolean active;
 
 	public Double getLatitude() {
 		return latitude;
@@ -56,12 +57,24 @@ public class Poi {
 		return poiId;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public void setPoiId(long poiId) {
+		this.poiId = poiId;
 	}
 
 }

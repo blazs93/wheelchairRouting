@@ -20,6 +20,7 @@ public class Route {
 	private List<Waypoint> waypoints;*/
 	private Long sourceId;
 	private Long destinationId;
+	private Boolean active;
 
 	public String getAccessible() {
 		return acc;
@@ -59,5 +60,13 @@ public class Route {
 
 	public void setDestinationId(long destinationId) {
 		this.destinationId = destinationId;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 }
