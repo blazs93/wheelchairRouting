@@ -1,0 +1,182 @@
+#map {
+	height: 100%;
+	margin-top: 55px;
+}
+
+html, body {
+	height: 96%;
+	margin: 0;
+	padding: 0;
+}
+
+#floating-panel {
+	position: absolute;
+	top: 10px;
+	left: 25%;
+	z-index: 5;
+	background-color: #fff;
+	padding: 5px;
+	border: 1px solid #999;
+	text-align: center;
+	font-family: 'Roboto', 'sans-serif';
+	line-height: 30px;
+	padding-left: 10px;
+}
+
+#navbar {
+	background-color: rgb(247, 186, 123);
+}
+
+.navbar-inverse {
+	background-color: rgb(247, 186, 123);
+	border-color: rgb(247, 186, 123);
+}
+
+.container {
+	width: 98%;
+}
+
+.form-group {
+	margin-left: 0px;
+	margin-right: 0px;
+	padding: 5px;
+}
+
+.btn-primary {
+	margin-left: 0px;
+	margin-right: 0px;
+	background-color: rgb(101, 180, 206);
+	border-color: rgb(101, 180, 206);
+}
+
+.btn-primary:hower {
+	background-color: #204d74;
+	border-color: #204d74;
+}
+
+.btn-primary:active {
+	background-color: #204d74;
+	border-color: #204d74;
+}
+
+.btn-primary:focus {
+	border-color: #204d74;
+	background-color: rgb(101, 180, 206);
+}
+
+.
+a {
+	color: white;
+}
+
+a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+#userTable {
+	margin-top: 100px;
+	margin-left: 50px;
+	width: 90%;
+}
+
+.controlUI {
+	direction: ltr;
+	overflow: hidden;
+	text-align: center;
+	position: relative;
+	color: rgb(86, 86, 86);
+	font-family: Roboto, Arial, sans-serif;
+	user-select: none;
+	font-size: 120%;
+	background-color: rgb(255, 255, 255);
+	padding: 8px;
+	border-bottom-right-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+	border-left: 0px;
+	min-width: 37px;
+	margin-top: 10px;
+	margin-left: 2px;
+}
+
+.controlUI:hover {
+	direction: ltr;
+	overflow: hidden;
+	text-align: center;
+	position: relative;
+	color: rgb(0, 0, 0);
+	font-family: Roboto, Arial, sans-serif;
+	user-select: none;
+	font-size: 120%;
+	background-color: rgb(235, 235, 235);
+	padding: 8px;
+	border-bottom-right-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+	border-left: 0px;
+	min-width: 37px;
+}
+
+.controlUIactive {
+	direction: ltr;
+	overflow: hidden;
+	text-align: center;
+	position: relative;
+	color: rgb(0, 0, 0);
+	font-family: Roboto, Arial, sans-serif;
+	user-select: none;
+	font-size: 120%;
+	background-color: rgb(235, 235, 235);
+	padding: 8px;
+	border-bottom-right-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+	border-left: 0px;
+	min-width: 37px;
+	margin-top: 10px;
+	margin-left: 2px;
+}
+
+.customControlDiv {
+	margin-left: 10px;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+#spinner {
+	font-size: 550%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+#markerComment {
+	width: 80%;
+}
+
+#markerCommentButton {
+	float: right;
+}
+
+#markerPoiId {
+	visibility: hidden;
+}
+
+.hidden{
+	visibility: hidden;
+}
+
+.poiDiv{
+	padding: 5px;
+    background: #f5f5f5;
+    font-size: 120%;
+}
