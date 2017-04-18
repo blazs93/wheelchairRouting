@@ -14,6 +14,7 @@ public class RouteBean extends Route {
 		setDistance(r.getDistance());
 		setSourceId(r.getSourceId());
 		setId(r.getId());
+		setActive(r.getActive());
 	}
 
 	public List<Waypoint> getWaypoints() {

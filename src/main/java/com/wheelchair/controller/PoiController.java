@@ -67,6 +67,18 @@ public class PoiController {
 		p.setLongitude(longitude);
 		p.setName(name);
 		poiRepository.save(p);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/updatePoiAdmin")
+	public String updatePoiAdmin(@RequestParam Long poiId, @RequestParam Double latitude, @RequestParam Double longitude, @RequestParam String description, @RequestParam String accessible, @RequestParam String name) {
+		Poi p = poiRepository.getOne(poiId);
+		p.setAccessible(accessible);
+		p.setDescription(description);
+		p.setLatitude(latitude);
+		p.setLongitude(longitude);
+		p.setName(name);
+		poiRepository.save(p);
 		return "redirect:/admin.html";
 	}
 }

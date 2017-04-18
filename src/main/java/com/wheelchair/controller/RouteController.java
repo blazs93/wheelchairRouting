@@ -18,6 +18,10 @@ import com.wheelchair.dijkstra.Graph;
 
 @Controller
 public class RouteController {
+	
+	private static String ACCESSIBLE = "bejárható";
+	private static String NOT_ACCESSIBLE = "nem bejárható";
+	private static String NOT_DEFINED = "nincs meghatározva";
 
 	@Autowired
 	private RouteRepository routeRepository;
@@ -36,6 +40,7 @@ public class RouteController {
 		route.setSourceId(waypoint1);
 		route.setDestinationId(waypoint2);
 		route.setAccessible(accessible);
+		route.setActive(false);
 
 		//Route route2 = new Route();
 		//route2.setAccessible(accessible);
@@ -97,6 +102,63 @@ public class RouteController {
 		}
 		return routeBeans;
 	}
+	
+	@GetMapping(path = "/allActiveRoutes")
+	public @ResponseBody Iterable<RouteBean> getAllActiveRoutes() {
+		List<RouteBean> routeBeans = new ArrayList<RouteBean>();
+		List<Route> routes = routeRepository.findActiveRoutes();
+		for (Route r : routes) {
+			List<Waypoint> wps = new ArrayList<Waypoint>();
+			wps.add(waypointRepository.getOne(r.getSourceId()));
+			wps.add(waypointRepository.getOne(r.getDestinationId()));
+			RouteBean rb = new RouteBean(r);
+			rb.setWaypoints(wps);
+			routeBeans.add(rb);
+		}
+		return routeBeans;
+	}
+	
+	@RequestMapping("/activateRoute")
+	public String activateRoute(@RequestParam Boolean active, @RequestParam Long id) {
+		routeRepository.updateRouteActive(active, id);
+		return "redirect:/admin.html";  
+	}
+	
+	@RequestMapping("/deleteRoute")
+	public String deleteRoute(@RequestParam Long id) {
+		routeRepository.delete(id);
+		return "redirect:/admin.html";  
+	}
+	
+	@RequestMapping("/updateRoute")
+	public String updateRoute(@RequestParam Long routeId, @RequestParam String routeAccessible) {
+		Route r = routeRepository.findOne(routeId);
+		if ((routeAccessible.equalsIgnoreCase(ACCESSIBLE) || routeAccessible.equalsIgnoreCase(NOT_DEFINED)) && r.getAccessible().equalsIgnoreCase(NOT_ACCESSIBLE)) {
+			r.setDistance(r.getDistance()/1000);
+		}
+		
+		if (routeAccessible.equalsIgnoreCase(NOT_ACCESSIBLE)  && (routeAccessible.equalsIgnoreCase(NOT_DEFINED) || r.getAccessible().equalsIgnoreCase(ACCESSIBLE))) {
+			r.setDistance(r.getDistance()*1000);
+		}
+		r.setAccessible(routeAccessible);
+		routeRepository.save(r);
+		return "redirect:/admin.html";  
+	}
+	
+	@RequestMapping("/updateRouteAdmin")
+	public String updateRouteAdmin(@RequestParam Long routeId, @RequestParam String routeAccessible) {
+		Route r = routeRepository.findOne(routeId);
+		if ((routeAccessible.equalsIgnoreCase(ACCESSIBLE) || routeAccessible.equalsIgnoreCase(NOT_DEFINED)) && r.getAccessible().equalsIgnoreCase(NOT_ACCESSIBLE)) {
+			r.setDistance(r.getDistance()/1000);
+		}
+		
+		if (routeAccessible.equalsIgnoreCase(NOT_ACCESSIBLE)  && (routeAccessible.equalsIgnoreCase(NOT_DEFINED) || r.getAccessible().equalsIgnoreCase(ACCESSIBLE))) {
+			r.setDistance(r.getDistance()*1000);
+		}
+		r.setAccessible(routeAccessible);
+		routeRepository.save(r);
+		return "redirect:/";  
+	}
 
 	@GetMapping(path = "/notAccessibleRoutes")
 	public @ResponseBody Iterable<Route> getNotAccessibleRoutes() {
@@ -106,7 +168,7 @@ public class RouteController {
 	@RequestMapping("/routing")
 	public @ResponseBody Iterable<Waypoint> routing(@RequestParam Long waypoint1, @RequestParam Long waypoint2) {
 		Graph.vertexes.clear();
-		List<Route> routes = routeRepository.findAll();
+		List<Route> routes = routeRepository.findActiveRoutes();
 		List<Graph.Edge> edges = new ArrayList<Graph.Edge>();
 
 		// Fontos az élekben a csúcsok sorrendje!! Az adatbázis növekvően

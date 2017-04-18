@@ -56,6 +56,20 @@
               <tbody id="poiTableBody" class="tb">
               </tbody>
 	   </table>
+	   
+	   <h2 class ="tableTitle">Utak</h2>
+	   <table id="routeTable" class="table">
+	   	 <thead>
+                <tr>
+                  <th class="th">Id</th>
+                  <th class ="th">Aktív </th>
+                  <th class ="th">Szerkesztés </th>
+                  <th class="th">Törlés</th>
+                </tr>
+              </thead>
+              <tbody id="routeTableBody" class="tb">
+              </tbody>
+	   </table>
 
 		   <div class="modal fade" id="successModal" tabindex="-1" role="dialog">
 			<div class="modal-dialog">
@@ -85,7 +99,7 @@
 					<h4 class="modal-title">POI szerkesztése</h4>
 				</div>
 				<div class="modal-body">
-					<form action='/updatePoi' method="GET">
+					<form action='/updatePoiAdmin' method="GET">
 						<input id="poiId" name="poiId" class="hidden"></input>
 						<div class="form-group">
 							<label for="latitude">Latitude</label> <input id="latitude"
@@ -111,6 +125,36 @@
 						<div class="form-group">
 							<label for="accessible">Bejárhatóság</label> <select
 								class="form-control" id="acc" name="accessible">
+								<option>Nincs meghatározva</option>
+								<option>Bejárható</option>
+								<option>Nem bejárható</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary">Mentés</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Bezárás</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="editRouteModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Út szerkesztése</h4>
+				</div>
+				<div class="modal-body">
+					<form action='/updateRoute' method="GET">
+						<input id="routeId" name="routeId" class="hidden"></input>
+						
+						<div class="form-group">
+							<label for="routeAccessible">Bejárhatóság</label> <select
+								class="form-control" id="routeAccessible" name="routeAccessible">
 								<option>Nincs meghatározva</option>
 								<option>Bejárható</option>
 								<option>Nem bejárható</option>

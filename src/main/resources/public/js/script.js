@@ -2,6 +2,7 @@ var map;
 var geocoder;
 window.MY = {};
 MY.markers = []
+MY.routes = [];
 var poly;
 var platform;
 var fromLocation;
@@ -29,11 +30,11 @@ var CANCEL_ADD_NEW_POI = "POI hozzáadás elvetése";
 //accessible
 var ACCESSIBLE = "Bejárható";
 var NOT_ACCESSIBLE = "Nem bejárható";
-var NOT_DEFINED = "Nem meghatározott";
+var NOT_DEFINED = "Nincs meghatározva";
 
 var ACCESSIBLE_HUN = "Állapot: Bejárható";
 var NOT_ACCESSIBLE_HUN = "Állapot: Nem bejárható";
-var NOT_DEFINED_HUN = "Állapot: Nem meghatározott";
+var NOT_DEFINED_HUN = "Állapot: Nincs meghatározva";
 // Get auth, to add or remove role specific buttons.
 $(document).ready(
   function() {
@@ -496,7 +497,9 @@ function initMap() {
           name : point.name,
           accessible: point.accessible,
           poiId: point.poiId,
-          description: point.description
+          description: point.description,
+          latitude: latitude,
+          longitude: longitude
 
         });
         marker.id=point.latitude+point.longitude;
@@ -504,24 +507,35 @@ function initMap() {
       }
       MY.markers.forEach(function (element){
         google.maps.event.addDomListener(element, 'click', function() {
-          $('#markerModal').modal({backdrop: "static"});
-          var acc = "";
-          if (element.accessible == ACCESSIBLE) {
-              acc = ACCESSIBLE_HUN;
-          } else if (element.accessible == NOT_ACCESSIBLE) {
-              acc = NOT_ACCESSIBLE_HUN;
-          } else {
-              acc = NOT_DEFINED_HUN;
-          }
-          $('#markerDescription').text(element.description);
-          if(element.name != null) {
-            $('#markerTitle').text(element.name);
-          } else {
-            $('#markerTitle').text("POI");
-          }
-          $('#markerAccessible').text(acc);
-          $('#markerPoiId').text(element.poiId);  
-
+        	if(loginName == "admin") {
+        		$('#editPOIModal').modal({backdrop: "static"});
+        		$('#latitude').val(element.latitude);
+                $('#longitude').val(element.longitude);
+                $('#name').val(element.name);
+                $('#description').val(element.description);
+                $('#acc').val(element.accessible);
+                $('#poiId').val(element.poiId);
+        	}
+        	else {
+        		$('#markerModal').modal({backdrop: "static"});
+                var acc = "";
+                if (element.accessible == ACCESSIBLE) {
+                    acc = ACCESSIBLE_HUN;
+                } else if (element.accessible == NOT_ACCESSIBLE) {
+                    acc = NOT_ACCESSIBLE_HUN;
+                } else {
+                    acc = NOT_DEFINED_HUN;
+                }
+                $('#markerDescription').text(element.description);
+                if(element.name != null) {
+                  $('#markerTitle').text(element.name);
+                } else {
+                  $('#markerTitle').text("POI");
+                }
+                $('#markerAccessible').text(acc);
+                $('#markerPoiId').text(element.poiId);  
+        	}
+          
           //$.get('/getComments', 
           //    { 
           //     poiId: $('#markerPoiId').text()
@@ -549,10 +563,9 @@ function initMap() {
   });
 
 //Add Routes
-  $.get("/allRoutes", function(data, status) {
+  $.get("/allActiveRoutes", function(data, status) {
     if (status == "success") {
       for (var i = 0; i < data.length; i++) {
-        //var points = $.parseJSON(data[i].points);
         var points = [];
         points.push(new google.maps.LatLng(data[i].waypoints[0].latitude, data[i].waypoints[0].longitude));
         points.push(new google.maps.LatLng(data[i].waypoints[1].latitude, data[i].waypoints[1].longitude));
@@ -572,10 +585,23 @@ function initMap() {
           strokeOpacity: 0.2,
           strokeWeight: 10
         });
+        path.id = data[i].id;
+        path.accessible = data[i].accessible;
 
         path.setMap(map);
+        MY.routes[i] = path;
       }
       $('#spinner').hide();
+      MY.routes.forEach(function (element){
+          google.maps.event.addDomListener(element, 'click', function() {
+          	if(loginName == "admin") {
+          		$('#editRouteModal').modal({backdrop: "static"});
+                $('#routeAccessible').val(element.accessible);
+                $('#routeId').val(element.id);
+          	}
+          });
+        });
+      
     }
     else{
       alert(status);
