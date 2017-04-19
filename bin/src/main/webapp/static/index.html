@@ -84,13 +84,13 @@
 				</div>
 				<div class="modal-body">
 					<form action='/addPoi' method="GET">
-						<div class="form-group hidden">
+						<div class="form-group hidden" aria-hidden="true">
 							<label for="latitude">Latitude</label> <input id="latitude"
 								name="latitude" type="text" placeholder="Latitude"
 								class="form-control">
 						</div>
 
-						<div class="form-group hidden">
+						<div class="form-group hidden" aria-hidden="true">
 							<label for="longitude">Longitude</label> <input id="longitude"
 								name="longitude" type="text" placeholder="Longitude"
 								class="form-control">
@@ -193,8 +193,8 @@
 				<div class="modal-body">
 					<form action='/addRoute' method="GET">
 						<div class="form-group">
-							<input class="hidden" id="waypoint1" name="waypoint1"/>
-							<input class="hidden" id="waypoint2" name="waypoint2"/>
+							<input class="hidden" id="waypoint1" name="waypoint1" aria-hidden="true"/>
+							<input class="hidden" id="waypoint2" name="waypoint2" aria-hidden="true"/>
 							<label
 								for="accessible">Bejárhatóság</label> <select
 								class="form-control" id="accessible" name="accessible">

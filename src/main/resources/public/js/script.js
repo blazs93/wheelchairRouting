@@ -255,6 +255,12 @@ function CustomControl(controlDiv, map) {
   var marker = document.createElement('span');
   marker.setAttribute("class", "glyphicon glyphicon-map-marker");
   addPOIButton.appendChild(marker);
+  
+  var p = document.createElement('p');
+  p.setAttribute("class", "hidden");
+  p.setAttribute("aria-hidden", "true");
+  p.innerHTML = "Poi hozzáadás";
+  addPOIButton.appendChild(p);
 
   // Setup the click event listeners
   var buttonActive = false;
@@ -282,6 +288,12 @@ function CustomControl(controlDiv, map) {
   addWaypointButton.setAttribute("class", "controlUI");
   addWaypointButton.title = 'Új kereszteződés hozzáadása';
   controlDiv.appendChild(addWaypointButton);
+  
+  var p = document.createElement('p');
+  p.setAttribute("class", "hidden");
+  p.setAttribute("aria-hidden", "true");
+  p.innerHTML = "Új kereszteződés";
+  addWaypointButton.appendChild(p);
 
   //Waypoint icon
   var waypoint = document.createElement('span');
@@ -316,6 +328,12 @@ function CustomControl(controlDiv, map) {
   addRouteButton.setAttribute("class", "controlUI");
   addRouteButton.title = 'Új út hozzáadása';
   controlDiv.appendChild(addRouteButton);
+  
+  var p = document.createElement('p');
+  p.setAttribute("class", "hidden");
+  p.setAttribute("aria-hidden", "true");
+  p.innerHTML = "Új út";
+  addRouteButton.appendChild(p);
 
   //Route icon
   var route = document.createElement('span');

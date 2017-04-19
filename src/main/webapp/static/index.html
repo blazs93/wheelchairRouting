@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="hu">
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <meta charset="utf-8">
@@ -41,13 +41,14 @@
 	          </div> -->
 				<div class="navbar-form navbar-left form-group">
 					<input id="from" type="text" placeholder="Honnan"
-						class="form-control">
+						class="form-control" aria-label="Honnan">
 				</div>
 				<div class="navbar-form navbar-left form-group">
-					<input id="to" type="text" placeholder="Hová" class="form-control">
+					<input id="to" type="text" placeholder="Hová" class="form-control" aria-label="Hová">
 				</div>
 				<div class="navbar-form navbar-left form-group">
 					<button id="search" class="btn btn-primary" title="Keresés">
+						<p class="hidden" aria-hidden = "true">Keresés</p>
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</div>
@@ -85,7 +86,7 @@
 				</div>
 				<div class="modal-body">
 					<form action='/updatePoi' method="GET">
-						<input id="updatePoiPoiId" name="updatePoiPoiId" class="hidden"></input>
+						<input id="updatePoiPoiId" name="updatePoiPoiId" class="hidden" aria-hidden="true" aria-label="updatePoiPoiId"></input>
 						<div class="form-group">
 							<label for="updatePoiLatitude">Latitude</label> <input id="updatePoiLatitude"
 								name="updatePoiLatitude" type="text" placeholder="Latitude"
@@ -135,13 +136,13 @@
 				</div>
 				<div class="modal-body">
 					<form action='/addPoi' method="GET">
-						<div class="form-group hidden">
+						<div class="form-group hidden" aria-hidden="true">
 							<label for="addPoiLatitude">Latitude</label> <input id="addPoiLatitude"
 								name="addPoiLatitude" type="text" placeholder="Latitude"
 								class="form-control">
 						</div>
 
-						<div class="form-group hidden">
+						<div class="form-group hidden" aria-hidden="true">
 							<label for="addPoiLongitude">Longitude</label> <input id="addPoiLongitude"
 								name="addPoiLongitude" type="text" placeholder="Longitude"
 								class="form-control">
@@ -244,8 +245,8 @@
 				<div class="modal-body">
 					<form action='/addRoute' method="GET">
 						<div class="form-group">
-							<input class="hidden" id="waypoint1" name="waypoint1"/>
-							<input class="hidden" id="waypoint2" name="waypoint2"/>
+							<input class="hidden" id="waypoint1" name="waypoint1" aria-hidden="true" aria-label="waypoint1"/>
+							<input class="hidden" id="waypoint2" name="waypoint2" aria-hidden="true" aria-label="waypoint2"/>
 							<label
 								for="accessible">Bejárhatóság</label> <select
 								class="form-control" id="accessible" name="accessible">
@@ -274,7 +275,7 @@
 				</div>
 				<div class="modal-body">
 					<form action='/updateRouteAdmin' method="GET">
-						<input id="routeId" name="routeId" class="hidden"></input>
+						<input id="routeId" name="routeId" class="hidden" aria-label="routeId></input>
 						
 						<div class="form-group">
 							<label for="routeAccessible">Bejárhatóság</label> <select

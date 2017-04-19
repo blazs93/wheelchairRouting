@@ -18,6 +18,7 @@ $(document).ready(function() {
                 var checkbox = document.createElement("INPUT");
                 checkbox.setAttribute("class", "customCheckbox");
                 checkbox.setAttribute("type", "checkbox");
+                checkbox.setAttribute("aria-label",data[i][0] + "activation")
                 checkbox.id = data[i][0];
                 checkbox.checked = data[i][1];
              
@@ -68,6 +69,7 @@ $(document).ready(function() {
                 var checkbox = document.createElement("INPUT");
                 checkbox.setAttribute("class", "customCheckbox");
                 checkbox.setAttribute("type", "checkbox");
+                checkbox.setAttribute("aria-label",data[i].name + "activation")
                 checkbox.id = data[i].poiId + "PoiActive";
                 checkbox.checked = data[i].active;
              
@@ -80,6 +82,12 @@ $(document).ready(function() {
                 //edit button
                 var editButton = document.createElement('button');
                 editButton.id = data[i].poiId+"PoiEdit";
+                
+                var p = document.createElement('p');
+                p.setAttribute("class", "hidden");
+                p.setAttribute("aria-hidden", "true");
+                p.innerHTML = data[i].poiId+"PoiEdit";
+                editButton.appendChild(p);
     
                 var editSpan = document.createElement('span');
                 editSpan.setAttribute("class", "glyphicon glyphicon-pencil");
@@ -91,6 +99,12 @@ $(document).ready(function() {
                 //delete button
                 var button = document.createElement('button');
                 button.id = data[i].poiId+"PoiDelete";
+                
+                var p = document.createElement('p');
+                p.setAttribute("class", "hidden");
+                p.setAttribute("aria-hidden", "true");
+                p.innerHTML = data[i].poiId+"PoiDelete";
+                button.appendChild(p);
     
                 var span = document.createElement('span');
                 span.setAttribute("class", "glyphicon glyphicon-trash");
@@ -160,6 +174,7 @@ $(document).ready(function() {
                 var checkbox = document.createElement("INPUT");
                 checkbox.setAttribute("class", "customCheckbox");
                 checkbox.setAttribute("type", "checkbox");
+                heckbox.setAttribute("aria-label",data[i].id + "activation")
                 checkbox.id = data[i].id + "RouteActive";
                 checkbox.checked = data[i].active;
              
@@ -172,6 +187,12 @@ $(document).ready(function() {
                 //edit button
                 var editButton = document.createElement('button');
                 editButton.id = data[i].id+"RouteEdit";
+                
+                var p = document.createElement('p');
+                p.setAttribute("class", "hidden");
+                p.setAttribute("aria-hidden", "true");
+                p.innerHTML = data[i].id+"RouteEdit";
+                editButton.appendChild(p);
     
                 var editSpan = document.createElement('span');
                 editSpan.setAttribute("class", "glyphicon glyphicon-pencil");
@@ -183,6 +204,12 @@ $(document).ready(function() {
                 //delete button
                 var button = document.createElement('button');
                 button.id = data[i].id+"RouteDelete";
+                
+                var p = document.createElement('p');
+                p.setAttribute("class", "hidden");
+                p.setAttribute("aria-hidden", "true");
+                p.innerHTML = data[i].id+"RouteDelete";
+                button.appendChild(p);
     
                 var span = document.createElement('span');
                 span.setAttribute("class", "glyphicon glyphicon-trash");

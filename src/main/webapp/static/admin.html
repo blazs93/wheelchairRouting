@@ -1,5 +1,5 @@
 	<!DOCTYPE html>
-	<html>	
+	<html lang="hu">	
 	<head>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<meta charset="utf-8">
@@ -100,7 +100,7 @@
 				</div>
 				<div class="modal-body">
 					<form action='/updatePoiAdmin' method="GET">
-						<input id="poiId" name="poiId" class="hidden"></input>
+						<input id="poiId" name="poiId" class="hidden" aria-hidden="true" aria-label="poiId"></input>
 						<div class="form-group">
 							<label for="latitude">Latitude</label> <input id="latitude"
 								name="latitude" type="text" placeholder="Latitude"
@@ -113,7 +113,7 @@
 								class="form-control">
 						</div>
 						<div class="form-group">
-							<label for="longitude">Név</label> <input id="name"
+							<label for="name">Név</label> <input id="name"
 								name="name" type="text" placeholder="Név"
 								class="form-control">
 						</div>
@@ -124,7 +124,7 @@
 						</div>
 						<div class="form-group">
 							<label for="accessible">Bejárhatóság</label> <select
-								class="form-control" id="acc" name="accessible">
+								class="form-control" id="acc" name="accessible" aria-label="accessiblePoi">
 								<option>Nincs meghatározva</option>
 								<option>Bejárható</option>
 								<option>Nem bejárható</option>
@@ -150,7 +150,7 @@
 				</div>
 				<div class="modal-body">
 					<form action='/updateRoute' method="GET">
-						<input id="routeId" name="routeId" class="hidden"></input>
+						<input id="routeId" name="routeId" class="hidden" aria-hidden="true" aria-label="routeId"></input>
 						
 						<div class="form-group">
 							<label for="routeAccessible">Bejárhatóság</label> <select
