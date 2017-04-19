@@ -17,14 +17,14 @@ public class PoiController {
 	private PoiRepository poiRepository;
 	
 	@RequestMapping("/addPoi")
-	public String addNewPoi(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam String description, @RequestParam String accessible, @RequestParam String name) {
+	public String addNewPoi(@RequestParam Double addPoiLatitude, @RequestParam Double addPoiLongitude, @RequestParam String addPoiDescription, @RequestParam String addPoiAccessible, @RequestParam String addPoiName) {
 		Poi poi = new Poi();
-		poi.setLatitude(latitude);
-		poi.setLongitude(longitude);
-		poi.setDescription(description);
-		poi.setName(name);
+		poi.setLatitude(addPoiLatitude);
+		poi.setLongitude(addPoiLongitude);
+		poi.setDescription(addPoiDescription);
+		poi.setName(addPoiName);
 		poi.setActive(false);
-		poi.setAccessible(accessible);
+		poi.setAccessible(addPoiAccessible);
 		poiRepository.save(poi);
 		
 		return "redirect:/index.html";  
@@ -59,13 +59,13 @@ public class PoiController {
 	}
 	
 	@RequestMapping("/updatePoi")
-	public String updatePoi(@RequestParam Long poiId, @RequestParam Double latitude, @RequestParam Double longitude, @RequestParam String description, @RequestParam String accessible, @RequestParam String name) {
-		Poi p = poiRepository.getOne(poiId);
-		p.setAccessible(accessible);
-		p.setDescription(description);
-		p.setLatitude(latitude);
-		p.setLongitude(longitude);
-		p.setName(name);
+	public String updatePoi(@RequestParam Long updatePoiPoiId, @RequestParam Double updatePoiLatitude, @RequestParam Double updatePoiLongitude, @RequestParam String updatePoiDescription, @RequestParam String updatePoiAccessible, @RequestParam String updatePoiName) {
+		Poi p = poiRepository.getOne(updatePoiPoiId);
+		p.setAccessible(updatePoiAccessible);
+		p.setDescription(updatePoiDescription);
+		p.setLatitude(updatePoiLatitude);
+		p.setLongitude(updatePoiLongitude);
+		p.setName(updatePoiName);
 		poiRepository.save(p);
 		return "redirect:/";
 	}

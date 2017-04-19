@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <meta charset="utf-8">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet"
@@ -46,7 +47,7 @@
 					<input id="to" type="text" placeholder="Hová" class="form-control">
 				</div>
 				<div class="navbar-form navbar-left form-group">
-					<button id="search" class="btn btn-primary">
+					<button id="search" class="btn btn-primary" title="Keresés">
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</div>
@@ -84,31 +85,31 @@
 				</div>
 				<div class="modal-body">
 					<form action='/updatePoi' method="GET">
-						<input id="poiId" name="poiId" class="hidden"></input>
+						<input id="updatePoiPoiId" name="updatePoiPoiId" class="hidden"></input>
 						<div class="form-group">
-							<label for="latitude">Latitude</label> <input id="latitude"
-								name="latitude" type="text" placeholder="Latitude"
+							<label for="updatePoiLatitude">Latitude</label> <input id="updatePoiLatitude"
+								name="updatePoiLatitude" type="text" placeholder="Latitude"
 								class="form-control">
 						</div>
 
 						<div class="form-group">
-							<label for="longitude">Longitude</label> <input id="longitude"
-								name="longitude" type="text" placeholder="Longitude"
+							<label for="updatePoiLongitude">Longitude</label> <input id="updatePoiLongitude"
+								name="updatePoiLongitude" type="text" placeholder="Longitude"
 								class="form-control">
 						</div>
 						<div class="form-group">
-							<label for="longitude">Név</label> <input id="name"
-								name="name" type="text" placeholder="Név"
+							<label for="updatePoiName">Név</label> <input id="updatePoiName"
+								name="updatePoiName" type="text" placeholder="Név"
 								class="form-control">
 						</div>
 						<div class="form-group">
-							<label for="description">Leírás</label>
-							<textarea class="form-control" id="description"
-								name="description" rows="3"></textarea>
+							<label for="updatePoiDescription">Leírás</label>
+							<textarea class="form-control" id="updatePoiDescription"
+								name="updatePoiDescription" rows="3"></textarea>
 						</div>
 						<div class="form-group">
-							<label for="accessible">Bejárhatóság</label> <select
-								class="form-control" id="acc" name="accessible">
+							<label for="updatePoiAccessible">Bejárhatóság</label> <select
+								class="form-control" id="updatePoiAccessible" name="updatePoiAccessible">
 								<option>Nincs meghatározva</option>
 								<option>Bejárható</option>
 								<option>Nem bejárható</option>
@@ -135,29 +136,29 @@
 				<div class="modal-body">
 					<form action='/addPoi' method="GET">
 						<div class="form-group hidden">
-							<label for="latitude">Latitude</label> <input id="latitude"
-								name="latitude" type="text" placeholder="Latitude"
+							<label for="addPoiLatitude">Latitude</label> <input id="addPoiLatitude"
+								name="addPoiLatitude" type="text" placeholder="Latitude"
 								class="form-control">
 						</div>
 
 						<div class="form-group hidden">
-							<label for="longitude">Longitude</label> <input id="longitude"
-								name="longitude" type="text" placeholder="Longitude"
+							<label for="addPoiLongitude">Longitude</label> <input id="addPoiLongitude"
+								name="addPoiLongitude" type="text" placeholder="Longitude"
 								class="form-control">
 						</div>
 						<div class="form-group">
-							<label for="longitude">Név</label> <input id="name"
-								name="name" type="text" placeholder="Név"
+							<label for="addPoiName">Név</label> <input id="addPoiName"
+								name="addPoiName" type="text" placeholder="Név"
 								class="form-control">
 						</div>
 						<div class="form-group">
-							<label for="description">Leírás</label>
-							<textarea class="form-control" id="description"
-								name="description" rows="3"></textarea>
+							<label for="addPoiDescription">Leírás</label>
+							<textarea class="form-control" id="addPoiDescription"
+								name="addPoiDescription" rows="3"></textarea>
 						</div>
 						<div class="form-group">
-							<label for="accessible">Bejárhatóság</label> <select
-								class="form-control" id="acc" name="accessible">
+							<label for="addPoiAccessible">Bejárhatóság</label> <select
+								class="form-control" id="addPoiAccessible" name="addPoiAccessible">
 								<option>Nincs meghatározva</option>
 								<option>Bejárható</option>
 								<option>Nem bejárható</option>
@@ -248,7 +249,7 @@
 							<label
 								for="accessible">Bejárhatóság</label> <select
 								class="form-control" id="accessible" name="accessible">
-								<option>Nem meghatározott</option>
+								<option>Nincs meghatározva</option>
 								<option>Bejárható</option>
 								<option>Nem bejárható</option>
 							</select>

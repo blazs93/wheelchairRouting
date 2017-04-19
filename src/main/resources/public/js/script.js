@@ -151,7 +151,7 @@ function getRouting(){
                   geodesic: true,
                   strokeColor: color,
                   strokeOpacity: 1.0,
-                  strokeWeight: 4
+                  strokeWeight: 5
                 });
 
                 path1.setMap(map);
@@ -185,7 +185,7 @@ function getRouting(){
                               geodesic: true,
                               strokeColor: color,
                               strokeOpacity: 1.0,
-                              strokeWeight: 4
+                              strokeWeight: 5
                             });
                             path2.setMap(map);
 
@@ -205,7 +205,7 @@ function getRouting(){
                                     geodesic: false,
                                     strokeColor: color,
                                     strokeOpacity: 1.0,
-                                    strokeWeight: 4
+                                    strokeWeight: 5
                                   });
                                   route.setMap(map);
                               });
@@ -267,8 +267,8 @@ function CustomControl(controlDiv, map) {
       addPOIButton.title = CANCEL_ADD_NEW_POI;
       google.maps.event.addListener(map, 'click', function(event) {
         $('#myModal').modal({backdrop: "static"});
-        $('#latitude').val(event.latLng.lat());
-        $('#longitude').val(event.latLng.lng());
+        $('#addPoiLatitude').val(event.latLng.lat());
+        $('#addPoiLongitude').val(event.latLng.lng());
       });
     } else {
       addPOIButton.setAttribute("class", "controlUI");
@@ -509,12 +509,12 @@ function initMap() {
         google.maps.event.addDomListener(element, 'click', function() {
         	if(loginName == "admin") {
         		$('#editPOIModal').modal({backdrop: "static"});
-        		$('#latitude').val(element.latitude);
-                $('#longitude').val(element.longitude);
-                $('#name').val(element.name);
-                $('#description').val(element.description);
-                $('#acc').val(element.accessible);
-                $('#poiId').val(element.poiId);
+        		$('#updatePoiLatitude').val(element.latitude);
+                $('#updatePoiLongitude').val(element.longitude);
+                $('#updatePoiName').val(element.name);
+                $('#updatePoiDescription').val(element.description);
+                $('#updatePoiAccessible').val(element.accessible);
+                $('#updatePoiPoiId').val(element.poiId);
         	}
         	else {
         		$('#markerModal').modal({backdrop: "static"});
