@@ -174,7 +174,7 @@ $(document).ready(function() {
                 var checkbox = document.createElement("INPUT");
                 checkbox.setAttribute("class", "customCheckbox");
                 checkbox.setAttribute("type", "checkbox");
-                heckbox.setAttribute("aria-label",data[i].id + "activation")
+                checkbox.setAttribute("aria-label",data[i].id + "activation")
                 checkbox.id = data[i].id + "RouteActive";
                 checkbox.checked = data[i].active;
              
