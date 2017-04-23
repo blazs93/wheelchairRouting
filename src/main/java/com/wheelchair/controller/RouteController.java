@@ -171,14 +171,10 @@ public class RouteController {
 		List<Route> routes = routeRepository.findActiveRoutes();
 		List<Graph.Edge> edges = new ArrayList<Graph.Edge>();
 
-		// Fontos az élekben a csúcsok sorrendje!! Az adatbázis növekvően
-		// tárolja, azért megfordulhatnak a csúcsok sorrendjei -> elcsesz
-		// mindent!!!
-
 		for (int i = 0; i < routes.size(); i++) {
 			Route r = routes.get(i);
 			edges.add(new Graph.Edge(r.getSourceId().toString(), r.getDestinationId().toString(), r.getDistance()));
-			edges.add(new Graph.Edge(r.getDestinationId().toString(), r.getSourceId().toString(), r.getDistance()));
+			//edges.add(new Graph.Edge(r.getDestinationId().toString(), r.getSourceId().toString(), r.getDistance()));
 		}
 
 		Waypoint source = waypointRepository.getOne(waypoint1);

@@ -85,32 +85,36 @@
 					<h4 class="modal-title">POI szerkesztése</h4>
 				</div>
 				<div class="modal-body">
-					<form action='/updatePoi' method="GET">
+					<form action='/updatePoi' method="GET" data-toggle="validator">
 						<input id="updatePoiPoiId" name="updatePoiPoiId" class="hidden" aria-hidden="true" aria-label="updatePoiPoiId"></input>
 						<div class="form-group">
-							<label for="updatePoiLatitude">Latitude</label> <input id="updatePoiLatitude"
+							<label for="updatePoiLatitude">Latitude</label>
+							<input id="updatePoiLatitude"
 								name="updatePoiLatitude" type="text" placeholder="Latitude"
-								class="form-control">
+								class="form-control" required>
 						</div>
 
 						<div class="form-group">
-							<label for="updatePoiLongitude">Longitude</label> <input id="updatePoiLongitude"
+							<label for="updatePoiLongitude">Longitude</label>
+							<input id="updatePoiLongitude"
 								name="updatePoiLongitude" type="text" placeholder="Longitude"
-								class="form-control">
+								class="form-control" required>
 						</div>
 						<div class="form-group">
-							<label for="updatePoiName">Név</label> <input id="updatePoiName"
+							<label for="updatePoiName">Név</label>
+							<input id="updatePoiName"
 								name="updatePoiName" type="text" placeholder="Név"
-								class="form-control">
+								class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label for="updatePoiDescription">Leírás</label>
 							<textarea class="form-control" id="updatePoiDescription"
-								name="updatePoiDescription" rows="3"></textarea>
+								name="updatePoiDescription" rows="3" required></textarea>
 						</div>
 						<div class="form-group">
-							<label for="updatePoiAccessible">Bejárhatóság</label> <select
-								class="form-control" id="updatePoiAccessible" name="updatePoiAccessible">
+							<label for="updatePoiAccessible">Bejárhatóság</label>
+							<select
+								class="form-control" id="updatePoiAccessible" name="updatePoiAccessible" required>
 								<option>Nincs meghatározva</option>
 								<option>Bejárható</option>
 								<option>Nem bejárható</option>
@@ -135,31 +139,31 @@
 					<h4 class="modal-title">POI hozzáadása</h4>
 				</div>
 				<div class="modal-body">
-					<form action='/addPoi' method="GET">
+					<form action='/addPoi' method="GET" data-toggle="validator">
 						<div class="form-group hidden" aria-hidden="true">
 							<label for="addPoiLatitude">Latitude</label> <input id="addPoiLatitude"
 								name="addPoiLatitude" type="text" placeholder="Latitude"
-								class="form-control">
+								class="form-control" required>
 						</div>
 
 						<div class="form-group hidden" aria-hidden="true">
 							<label for="addPoiLongitude">Longitude</label> <input id="addPoiLongitude"
 								name="addPoiLongitude" type="text" placeholder="Longitude"
-								class="form-control">
+								class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label for="addPoiName">Név</label> <input id="addPoiName"
 								name="addPoiName" type="text" placeholder="Név"
-								class="form-control">
+								class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label for="addPoiDescription">Leírás</label>
 							<textarea class="form-control" id="addPoiDescription"
-								name="addPoiDescription" rows="3"></textarea>
+								name="addPoiDescription" rows="3" required></textarea>
 						</div>
 						<div class="form-group">
 							<label for="addPoiAccessible">Bejárhatóság</label> <select
-								class="form-control" id="addPoiAccessible" name="addPoiAccessible">
+								class="form-control" id="addPoiAccessible" name="addPoiAccessible" required>
 								<option>Nincs meghatározva</option>
 								<option>Bejárható</option>
 								<option>Nem bejárható</option>
@@ -301,5 +305,7 @@
 	<script src="js/script.js"></script>
 	<script src="js/spinner.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
 </body>
 </html>

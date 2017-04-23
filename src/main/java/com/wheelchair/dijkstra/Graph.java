@@ -82,7 +82,7 @@ public class Graph {
 		// another pass to set neighbouring vertices
 		for (Edge e : edges) {
 			graph.get(e.v1).neighbours.put(graph.get(e.v2), e.dist);
-			// graph.get(e.v2).neighbours.put(graph.get(e.v1), e.dist); //
+			graph.get(e.v2).neighbours.put(graph.get(e.v1), e.dist); //
 			// also do this for an undirected graph
 		}
 	}

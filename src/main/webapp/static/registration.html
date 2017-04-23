@@ -5,31 +5,43 @@
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
+   
+ 
     <title>Wheelchair Routing Regisztráció</title>
 
   </head>
 
   <body>
     <div class="container">
-      <form class="form-signin" action='/addUser' method="GET">
+      <form class="form-signin" action='/addUser' method="GET" data-toggle="validator">
         <h2 class="form-signin-heading">Regisztráció</h2>
 
-        <label class="sr-only" for="username">Login név</label>
-        <input class="form-control" type="text" id="username" name="username" placeholder="Login név">
-
-        <label class="sr-only" for="name">Név</label>
-        <input class="form-control" type="text" id="name" name="name" placeholder="Név">
-
-        <label class="sr-only" for="password">Jelszó</label>
-        <input class="form-control" type="password" id="password" name="password" placeholder="Jelszó">
-   
-        <label class="sr-only" for="password_confirm">Jelszó újra</label>
-        <input class="form-control" type="password" id="password_confirm" name="password_confirm" placeholder="Jelszó újra">
-
+		<div class="form-group">
+        	<label class="sr-only" for="username">Login név</label>
+        	<input class="form-control" type="text" id="username" name="username" placeholder="Login név" required>
+        	<div class="help-block with-errors"></div>
+		</div>
+		<div class="form-group">
+        	<label class="sr-only" for="name">Név</label>
+        	<input class="form-control" type="text" id="name" name="name" placeholder="Név" required>
+        	<div class="help-block with-errors"></div>
+		</div>
+		<div class="form-group">
+        	<label class="sr-only" for="password">Jelszó</label>
+        	<input class="form-control" type="password" id="password" name="password" placeholder="Jelszó" required>
+        	<div class="help-block with-errors"></div>
+   		</div>
+   		<div class="form-group">
+	        <label class="sr-only" for="password_confirm">Jelszó újra</label>
+	        <input class="form-control" type="password" id="password_confirm" name="password_confirm" placeholder="Jelszó újra" required data-match="#password" data-match-error="A jelszavak nem egyeznek">
+			<div class="help-block with-errors"></div>
+		</div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Regisztráció</button>
       </form>
     </div> 
+    <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
   </body>
 </html>
